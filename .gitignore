@@ -65,18 +65,18 @@ Assets/PackageMakerWindowData.asset*
 
 ClientSimStorage/
 
-Packages/com.miner28.vrclinking-sdk/VRCLinkingAPI/docs/
+Packages/com.vrclinking.vrclinking-sdk/VRCLinkingAPI/docs/
 
-Packages/com.miner28.vrclinking-sdk/VRCLinkingAPI/.openapi-generator/
+Packages/com.vrclinking.vrclinking-sdk/VRCLinkingAPI/.openapi-generator/
 
-Packages/com.miner28.vrclinking-sdk/VRCLinkingAPI/api/
+Packages/com.vrclinking.vrclinking-sdk/VRCLinkingAPI/api/
 
-Packages/com.miner28.vrclinking-sdk/VRCLinkingAPI/src/VRCLinkingAPI.Test/
+Packages/com.vrclinking.vrclinking-sdk/VRCLinkingAPI/src/VRCLinkingAPI.Test/
 
-Packages/com.miner28.vrclinking-sdk/VRCLinkingAPI/.openapi-generator-ignore
+Packages/com.vrclinking.vrclinking-sdk/VRCLinkingAPI/.openapi-generator-ignore
 
-Packages/com.miner28.vrclinking-sdk/VRCLinkingAPI/appveyor.yml
+Packages/com.vrclinking.vrclinking-sdk/VRCLinkingAPI/appveyor.yml
 
-Packages/com.miner28.vrclinking-sdk/VRCLinkingAPI/git_push.sh
+Packages/com.vrclinking.vrclinking-sdk/VRCLinkingAPI/git_push.sh
 
-Packages/com.miner28.vrclinking-sdk/VRCLinkingAPI/README.md
+Packages/com.vrclinking.vrclinking-sdk/VRCLinkingAPI/README.md
