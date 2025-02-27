@@ -1,7 +1,7 @@
 {
-  "name": "com.miner28.vrclinking-sdk",
+  "name": "com.vrclinking.vrclinking-sdk",
   "displayName": "VRCLinking SDK",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "unity": "2022.3",
   "description": "VRCLinking SDK",
   "vrchatVersion": "2022.1.1",
