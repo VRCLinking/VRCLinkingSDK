@@ -4,7 +4,7 @@
 // ReSharper disable ShiftExpressionRealShiftCountIsZero
 // ReSharper disable ShiftExpressionRightOperandNotEqualRealCount
 // ReSharper disable ConditionIsAlwaysTrueOrFalse
-namespace Miner28.VRCLinking
+namespace VRCLinking
 {
     public partial class VrcLinkingDownloader
     {

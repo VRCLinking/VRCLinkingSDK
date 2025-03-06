@@ -3,26 +3,26 @@ using System.Diagnostics;
 using System.Text;
 using TMPro;
 using UdonSharp;
-using VRC.SDK3.Data;
 using VRC.SDK3.StringLoading;
 using VRC.SDKBase;
-using VRC.Udon;
 using VRC.Udon.Common.Interfaces;
+using VRCLinking.Utilities;
 using Debug = UnityEngine.Debug;
 
-namespace Miner28.VRCLinking
+namespace VRCLinking
 {   
     public partial class VrcLinkingDownloader : UdonSharpBehaviour
     {
         public VRCUrl mainUrl;
         public VRCUrl fallbackUrl;
 
-        public LZWCompressor compressor;
+        public LzwCompressor compressor;
         public TextMeshProUGUI text;
 
 
         void Start()
         {
+            Debug.Log("Start");
             VRCStringDownloader.LoadUrl(mainUrl, (IUdonEventReceiver)this);
         }
 
@@ -62,6 +62,7 @@ namespace Miner28.VRCLinking
 
             Debug.Log($"Result bytes: {compressor.GetDecompressedData().Length}");
             Debug.Log($"Decompression time: {sw.ElapsedMilliseconds}ms");
+            ParseData(textData);
         }
         
         void Log(string message)

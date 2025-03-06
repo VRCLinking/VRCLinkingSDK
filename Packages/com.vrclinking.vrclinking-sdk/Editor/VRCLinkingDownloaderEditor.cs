@@ -1,4 +1,4 @@
-﻿using Miner28.VRCLinking;
+﻿using VRCLinking;
 using UnityEditor;
 
 namespace VRCLinking.Editor
@@ -13,5 +13,7 @@ namespace VRCLinking.Editor
             
             
         }
+        
+        
     }
 }

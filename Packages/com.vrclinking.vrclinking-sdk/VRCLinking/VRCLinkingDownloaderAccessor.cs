@@ -2,7 +2,7 @@
 using System.Text;
 using VRC.SDK3.Data;
 
-namespace Miner28.VRCLinking
+namespace VRCLinking
 {
     public partial class VrcLinkingDownloader
     {

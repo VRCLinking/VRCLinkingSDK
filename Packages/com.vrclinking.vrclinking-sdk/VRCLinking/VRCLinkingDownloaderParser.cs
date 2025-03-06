@@ -1,6 +1,7 @@
 ﻿using VRC.SDK3.Data;
+using VRCLinking.Modules;
 
-namespace Miner28.VRCLinking
+namespace VRCLinking
 {
     public partial class VrcLinkingDownloader
     {
@@ -45,6 +46,10 @@ namespace Miner28.VRCLinking
                     return;
                 }
             }
+            
+            _isDataValid = true;
+            
+            SendEventToModules(nameof(VrcLinkingModuleBase.OnDataLoaded));
         }
         
         string ParseChecksum(string input)
