@@ -1,7 +1,12 @@
 {
     "name": "VRCLinkingSDK.Editor",
     "rootNamespace": "",
-    "references": ["GUID:c078eac28054c1d4089fb46202b9e2e5","GUID:99835874ee819da44948776e0df4ff1d","GUID:40de092387b067c47bee3bf467755539"],
+    "references": [
+        "GUID:c078eac28054c1d4089fb46202b9e2e5",
+        "GUID:99835874ee819da44948776e0df4ff1d",
+        "GUID:5a6aa9f5a588eab4e9cfe004ed969de8",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f"
+    ],
     "includePlatforms": [
         "Editor"
     ],

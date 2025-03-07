@@ -1,0 +1,19 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <ui:VisualElement name="RootContainer" class="unity-inspector-element--uie-default unity-inspector-element--uie" style="flex-direction: row; padding-top: 6px; padding-right: 4px; padding-bottom: 6px; padding-left: 4px;">
+        <ui:VisualElement name="Header" style="width: 96px; height: 86px;">
+            <ui:VisualElement name="HeaderColor" style="background-image: resource(&apos;Square 64&apos;); -unity-background-scale-mode: scale-to-fit; border-top-left-radius: 64px; border-top-right-radius: 64px; border-bottom-right-radius: 64px; border-bottom-left-radius: 64px; flex-shrink: 0; height: 60px; margin-top: 6px;" />
+            <ui:Label tabindex="-1" text="Role Name" parse-escape-sequences="true" display-tooltip-when-elided="true" name="HeaderLabel" style="padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; -unity-text-align: middle-center; flex-grow: 1; font-size: 16px; -unity-font-style: bold; margin-top: 4px;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="Body" style="flex-grow: 1;">
+            <ui:EnumField label="Type" type="UnityEngine.TextAlignment, UnityEngine.TextRenderingModule" name="RoleTypeField" />
+            <ui:VisualElement name="NameIdContainer" style="flex-direction: row;">
+                <ui:TextField picking-mode="Ignore" label="Role Id" value="filler text" name="NameIdField" style="flex-grow: 1;" />
+                <ui:DropdownField choices="Role1,Role2,Role3" index="0" name="RoleSelectionField" />
+            </ui:VisualElement>
+            <ui:TextField picking-mode="Ignore" label="Separator" value="filler text" name="SeparatorField" />
+            <ui:FloatField label="Relative Size" value="42.2" name="RoleSizeField" />
+            <uie:ColorField label="Color" value="RGBA(0.000, 1.000, 1.000, 1.000)" name="RoleColorField" show-alpha="false" show-eye-dropper="false" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement name="Border" style="height: 1px; background-color: rgba(255, 255, 255, 0.5); position: absolute; left: 0; right: 0; top: -2px; display: none;" />
+</ui:UXML>

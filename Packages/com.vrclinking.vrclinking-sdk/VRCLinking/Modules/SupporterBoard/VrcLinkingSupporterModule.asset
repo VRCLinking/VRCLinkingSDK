@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: VrcLinkingSupporterModule
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: 07375fe435c221d4a9e1cc01caa3d30f, type: 2}
+  serializedUdonProgramAsset: {fileID: 11400000, guid: 1d1eb1fc3362b3a4c8b9480edbc7f505, type: 2}
   udonAssembly: 
   assemblyError: 
   sourceCsScript: {fileID: 11500000, guid: de944b568d5cda647a60014667f94e27, type: 3}

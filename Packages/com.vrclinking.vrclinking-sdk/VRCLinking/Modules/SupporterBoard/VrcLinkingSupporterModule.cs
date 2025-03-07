@@ -5,8 +5,6 @@ using UdonSharp;
 using UnityEngine;
 using VRC.SDK3.Data;
 using VRC.Udon.Serialization.OdinSerializer;
-using VRCLinking.Modules;
-using VRCLinking.Modules.SupporterBoard.Editor;
 using VRCLinking.Utilitites;
 
 namespace VRCLinking.Modules.SupporterBoard
@@ -15,18 +13,21 @@ namespace VRCLinking.Modules.SupporterBoard
     public class VrcLinkingSupporterModule : VrcLinkingModuleBase
     {
         public TextMeshProUGUI supporterBoardText;
-        
-        [OdinSerialize]
-        public DataList roles;
-        
+
+#if !COMPILER_UDONSHARP
+        public List<SupporterRole> roleList = new List<SupporterRole>();
+#endif
+
+        [OdinSerialize] public DataList roles;
+
         [SerializeField] internal float scrollSpeed = 1f;
         [SerializeField] internal float scrollWait = 3f;
-        
+
         [SerializeField] internal RectTransform maskRect;
         [SerializeField] internal RectTransform contentRect;
-        
+
         private protected override string ModuleName => "VrcLinkingSupporterModule";
-        
+
 
         public override void OnDataLoaded()
         {
@@ -44,7 +45,7 @@ namespace VRCLinking.Modules.SupporterBoard
                 var rank = role["roleValue"].String;
                 var nameSeparator = role["roleSeparator"].String;
                 var roleRelativeSize = role["roleRelativeSize"].Float;
-                
+
                 sb.Append($"<color={((Color)role["roleColor"].Reference).ToHex()}>");
                 sb.Append($"<size={roleRelativeSize}%>");
 
@@ -76,41 +77,41 @@ namespace VRCLinking.Modules.SupporterBoard
                         }
                     }
                 }
-                
 
-                
+
                 sb.Append("</color>");
                 sb.Append("</size>");
 
                 sb.AppendLine();
             }
-            
+
             supporterBoardText.text = sb.ToString();
             ResetScroll();
             SendCustomEventDelayedSeconds(nameof(_CustomUpdate), scrollWait);
         }
-        
+
         void ResetScroll()
         {
             if (maskRect == null || contentRect == null)
             {
                 return;
             }
-            
+
             contentRect.anchoredPosition = new Vector2(0, 0);
         }
-        
+
         void ReverseScroll()
         {
             if (maskRect == null || contentRect == null)
             {
                 return;
             }
-            
+
             scrollSpeed = -scrollSpeed;
         }
 
         float _waitTime = 0;
+
         public void _CustomUpdate()
         {
             if (maskRect == null || contentRect == null)
@@ -132,6 +133,7 @@ namespace VRCLinking.Modules.SupporterBoard
                     contentRect.anchoredPosition = new Vector2(0, contentRect.rect.height - maskRect.rect.height);
                     _waitTime = 0;
                 }
+
                 SendCustomEventDelayedFrames(nameof(_CustomUpdate), 1);
                 return;
             }
@@ -145,16 +147,15 @@ namespace VRCLinking.Modules.SupporterBoard
                     contentRect.anchoredPosition = new Vector2(0, 0);
                     _waitTime = 0;
                 }
+
                 SendCustomEventDelayedFrames(nameof(_CustomUpdate), 1);
                 return;
             }
 
             contentRect.anchoredPosition += new Vector2(0, scrollSpeed * Time.deltaTime);
-            
-            
+
+
             SendCustomEventDelayedFrames(nameof(_CustomUpdate), 1);
         }
-        
-        
     }
 }

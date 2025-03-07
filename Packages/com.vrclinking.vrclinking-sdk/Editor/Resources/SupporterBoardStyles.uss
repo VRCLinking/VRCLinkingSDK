@@ -1,0 +1,15 @@
+.VariablePanel {
+    background-color: var(--unity-colors-helpbox-background);
+    border-color: var(--unity-colors-helpbox-border);
+    border-radius: 3px;
+    border-width: 1px;
+    margin-bottom: 8px;
+    margin-top: 8px;
+    padding: 2px;
+}
+
+.Header {
+    background-color: var(--unity-colors-app_toolbar_button-background);
+    border-color: var(--unity-colors-helpbox-border);
+    border-bottom-width: 1px;
+}
