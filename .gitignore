@@ -80,3 +80,9 @@ Packages/com.vrclinking.vrclinking-sdk/VRCLinkingAPI/appveyor.yml
 Packages/com.vrclinking.vrclinking-sdk/VRCLinkingAPI/git_push.sh
 
 Packages/com.vrclinking.vrclinking-sdk/VRCLinkingAPI/README.md
+
+Packages/com.vrclinking.vrclinking-sdk/generate-api.bat.meta
+
+Packages/com.vrclinking.vrclinking-sdk/openapitools.json
+
+Packages/com.vrclinking.vrclinking-sdk/openapitools.json.meta

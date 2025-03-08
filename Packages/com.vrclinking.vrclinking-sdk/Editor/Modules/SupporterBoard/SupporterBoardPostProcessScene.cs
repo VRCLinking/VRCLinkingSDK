@@ -15,7 +15,7 @@ namespace VRCLinking.Modules.SupporterBoard.Editor
 
             foreach (VrcLinkingSupporterModule module in modules)
             {
-                module.roles = SupporterUtilities.ConvertToDataList(module.roleList);
+                //module.roles = SupporterUtilities.ConvertToDataList(module.roleList);
             }
         }
     }

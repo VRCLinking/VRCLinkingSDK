@@ -1,7 +1,0 @@
-{
-    "name": "VRCLinkingAPI",
-    "overrideReferences": true,
-    "precompiledReferences": [
-        "Newtonsoft.Json.dll"
-    ]
-}

@@ -17,6 +17,8 @@ namespace VRCLinking.Editor
             if (downloader == null)
             {
                 return;
+                
+                
             }
             
             var modules = objects.Select(o => o.GetComponent<VrcLinkingModuleBase>()).Where(o => o != null).ToArray();
