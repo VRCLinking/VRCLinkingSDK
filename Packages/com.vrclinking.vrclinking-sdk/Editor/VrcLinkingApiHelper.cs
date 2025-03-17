@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using UnityEditor;
+using UnityEngine;
 using VRCLinking.Editor.Models;
 using VRCLinkingAPI.Api;
 using VRCLinkingAPI.Client;
@@ -48,6 +49,11 @@ namespace VRCLinking.Editor
             return guilds.Guilds;
         }
         
+        public async Task<Guild> GetGuild(string guildId)
+        {
+            return await _guildsApi.GetGuildAsync(guildId);
+        }
+        
         public async Task<List<WorldSettingsDto>> GetWorldSettingsList(string guildId)
         {
             var settings = await _worldsApi.GetGuildWorldsAsync(guildId);
@@ -65,10 +71,32 @@ namespace VRCLinking.Editor
             return await _usersApi.GetUserAsync();
         }
         
+        public async Task<bool> IsUserLoggedIn()
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(GetToken()))
+                {
+                    return false;
+                }
+                await GetCurrentUser();
+                return true;
+            }
+            catch (ApiException e)
+            {
+                return false;
+            }
+        }
+        
         public async Task<string> GetTokenUrl()
         {
             var token = await _tokenAuthApi.GetSdkLoginTokenAsync();
-            return $"{OauthBaseUrl}sdk-oauth?token={token.Token}";
+            return token.Token;
+        }
+
+        public string GetTokenUrl(string token)
+        {
+            return $"{OauthBaseUrl}sdk-oauth?token={token}";
         }
 
         public async Task<(AuthStatus, SdkLoginResponse)> TryLogin(string token)
