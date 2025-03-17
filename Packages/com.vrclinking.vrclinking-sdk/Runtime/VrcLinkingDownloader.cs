@@ -17,7 +17,6 @@ namespace VRCLinking
         public VRCUrl fallbackUrl;
 
         public LzwCompressor compressor;
-        public TextMeshProUGUI text;
 
 
         void Start()
@@ -56,9 +55,6 @@ namespace VRCLinking
             Debug.Log("Decompression success");
             var bytesLength = compressor.GetDecompressedData().Length;
             var textData = Encoding.UTF8.GetString(compressor.GetDecompressedData());
-            text.text =
-                $"Decompression success\nDecompression time: {sw.ElapsedMilliseconds}ms\nResult bytes: {bytesLength}, KB: {bytesLength / 1024}, MB: {bytesLength / 1024 / 1024}" +
-                $"\n{textData.Substring(0, Math.Min(1000, textData.Length))}";
 
             Debug.Log($"Result bytes: {compressor.GetDecompressedData().Length}");
             Debug.Log($"Decompression time: {sw.ElapsedMilliseconds}ms");
