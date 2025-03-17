@@ -51,7 +51,7 @@ namespace VRCLinkingAPI.Api
         /// <param name="guildId"></param>
         /// <param name="worldId"></param>
         /// <returns></returns>
-        void DeleteGuildWorld(string guildId, int worldId);
+        void DeleteGuildWorld(string guildId, Guid worldId);
 
         /// <summary>
         /// 
@@ -63,7 +63,7 @@ namespace VRCLinkingAPI.Api
         /// <param name="guildId"></param>
         /// <param name="worldId"></param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> DeleteGuildWorldWithHttpInfo(string guildId, int worldId);
+        ApiResponse<Object> DeleteGuildWorldWithHttpInfo(string guildId, Guid worldId);
         /// <summary>
         /// 
         /// </summary>
@@ -71,7 +71,7 @@ namespace VRCLinkingAPI.Api
         /// <param name="guildId"></param>
         /// <param name="worldId"></param>
         /// <returns>WorldSettingsDto</returns>
-        WorldSettingsDto GetGuildWorld(string guildId, int worldId);
+        WorldSettingsDto GetGuildWorld(string guildId, Guid worldId);
 
         /// <summary>
         /// 
@@ -83,7 +83,7 @@ namespace VRCLinkingAPI.Api
         /// <param name="guildId"></param>
         /// <param name="worldId"></param>
         /// <returns>ApiResponse of WorldSettingsDto</returns>
-        ApiResponse<WorldSettingsDto> GetGuildWorldWithHttpInfo(string guildId, int worldId);
+        ApiResponse<WorldSettingsDto> GetGuildWorldWithHttpInfo(string guildId, Guid worldId);
         /// <summary>
         /// 
         /// </summary>
@@ -110,7 +110,7 @@ namespace VRCLinkingAPI.Api
         /// <param name="worldId"></param>
         /// <param name="updateWorldSettingsRequest"> (optional)</param>
         /// <returns>WorldSettingsDto</returns>
-        WorldSettingsDto UpdateGuildWorld(string guildId, int worldId, UpdateWorldSettingsRequest updateWorldSettingsRequest = default(UpdateWorldSettingsRequest));
+        WorldSettingsDto UpdateGuildWorld(string guildId, Guid worldId, UpdateWorldSettingsRequest updateWorldSettingsRequest = default(UpdateWorldSettingsRequest));
 
         /// <summary>
         /// 
@@ -123,7 +123,7 @@ namespace VRCLinkingAPI.Api
         /// <param name="worldId"></param>
         /// <param name="updateWorldSettingsRequest"> (optional)</param>
         /// <returns>ApiResponse of WorldSettingsDto</returns>
-        ApiResponse<WorldSettingsDto> UpdateGuildWorldWithHttpInfo(string guildId, int worldId, UpdateWorldSettingsRequest updateWorldSettingsRequest = default(UpdateWorldSettingsRequest));
+        ApiResponse<WorldSettingsDto> UpdateGuildWorldWithHttpInfo(string guildId, Guid worldId, UpdateWorldSettingsRequest updateWorldSettingsRequest = default(UpdateWorldSettingsRequest));
         #endregion Synchronous Operations
     }
 
@@ -167,7 +167,7 @@ namespace VRCLinkingAPI.Api
         /// <param name="worldId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task DeleteGuildWorldAsync(string guildId, int worldId, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task DeleteGuildWorldAsync(string guildId, Guid worldId, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// 
@@ -180,7 +180,7 @@ namespace VRCLinkingAPI.Api
         /// <param name="worldId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteGuildWorldWithHttpInfoAsync(string guildId, int worldId, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteGuildWorldWithHttpInfoAsync(string guildId, Guid worldId, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// 
         /// </summary>
@@ -192,7 +192,7 @@ namespace VRCLinkingAPI.Api
         /// <param name="worldId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of WorldSettingsDto</returns>
-        System.Threading.Tasks.Task<WorldSettingsDto> GetGuildWorldAsync(string guildId, int worldId, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<WorldSettingsDto> GetGuildWorldAsync(string guildId, Guid worldId, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// 
@@ -205,7 +205,7 @@ namespace VRCLinkingAPI.Api
         /// <param name="worldId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (WorldSettingsDto)</returns>
-        System.Threading.Tasks.Task<ApiResponse<WorldSettingsDto>> GetGuildWorldWithHttpInfoAsync(string guildId, int worldId, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<WorldSettingsDto>> GetGuildWorldWithHttpInfoAsync(string guildId, Guid worldId, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         /// <summary>
         /// 
         /// </summary>
@@ -241,7 +241,7 @@ namespace VRCLinkingAPI.Api
         /// <param name="updateWorldSettingsRequest"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of WorldSettingsDto</returns>
-        System.Threading.Tasks.Task<WorldSettingsDto> UpdateGuildWorldAsync(string guildId, int worldId, UpdateWorldSettingsRequest updateWorldSettingsRequest = default(UpdateWorldSettingsRequest), System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<WorldSettingsDto> UpdateGuildWorldAsync(string guildId, Guid worldId, UpdateWorldSettingsRequest updateWorldSettingsRequest = default(UpdateWorldSettingsRequest), System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// 
@@ -255,7 +255,7 @@ namespace VRCLinkingAPI.Api
         /// <param name="updateWorldSettingsRequest"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (WorldSettingsDto)</returns>
-        System.Threading.Tasks.Task<ApiResponse<WorldSettingsDto>> UpdateGuildWorldWithHttpInfoAsync(string guildId, int worldId, UpdateWorldSettingsRequest updateWorldSettingsRequest = default(UpdateWorldSettingsRequest), System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<WorldSettingsDto>> UpdateGuildWorldWithHttpInfoAsync(string guildId, Guid worldId, UpdateWorldSettingsRequest updateWorldSettingsRequest = default(UpdateWorldSettingsRequest), System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         #endregion Asynchronous Operations
     }
 
@@ -547,7 +547,7 @@ namespace VRCLinkingAPI.Api
         /// <param name="guildId"></param>
         /// <param name="worldId"></param>
         /// <returns></returns>
-        public void DeleteGuildWorld(string guildId, int worldId)
+        public void DeleteGuildWorld(string guildId, Guid worldId)
         {
             DeleteGuildWorldWithHttpInfo(guildId, worldId);
         }
@@ -559,7 +559,7 @@ namespace VRCLinkingAPI.Api
         /// <param name="guildId"></param>
         /// <param name="worldId"></param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public VRCLinkingAPI.Client.ApiResponse<Object> DeleteGuildWorldWithHttpInfo(string guildId, int worldId)
+        public VRCLinkingAPI.Client.ApiResponse<Object> DeleteGuildWorldWithHttpInfo(string guildId, Guid worldId)
         {
             // verify the required parameter 'guildId' is set
             if (guildId == null)
@@ -609,7 +609,7 @@ namespace VRCLinkingAPI.Api
         /// <param name="worldId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task DeleteGuildWorldAsync(string guildId, int worldId, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task DeleteGuildWorldAsync(string guildId, Guid worldId, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             var task = DeleteGuildWorldWithHttpInfoAsync(guildId, worldId, cancellationToken);
 #if UNITY_EDITOR || !UNITY_WEBGL
@@ -627,7 +627,7 @@ namespace VRCLinkingAPI.Api
         /// <param name="worldId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<VRCLinkingAPI.Client.ApiResponse<Object>> DeleteGuildWorldWithHttpInfoAsync(string guildId, int worldId, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<VRCLinkingAPI.Client.ApiResponse<Object>> DeleteGuildWorldWithHttpInfoAsync(string guildId, Guid worldId, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             // verify the required parameter 'guildId' is set
             if (guildId == null)
@@ -685,7 +685,7 @@ namespace VRCLinkingAPI.Api
         /// <param name="guildId"></param>
         /// <param name="worldId"></param>
         /// <returns>WorldSettingsDto</returns>
-        public WorldSettingsDto GetGuildWorld(string guildId, int worldId)
+        public WorldSettingsDto GetGuildWorld(string guildId, Guid worldId)
         {
             VRCLinkingAPI.Client.ApiResponse<WorldSettingsDto> localVarResponse = GetGuildWorldWithHttpInfo(guildId, worldId);
             return localVarResponse.Data;
@@ -698,7 +698,7 @@ namespace VRCLinkingAPI.Api
         /// <param name="guildId"></param>
         /// <param name="worldId"></param>
         /// <returns>ApiResponse of WorldSettingsDto</returns>
-        public VRCLinkingAPI.Client.ApiResponse<WorldSettingsDto> GetGuildWorldWithHttpInfo(string guildId, int worldId)
+        public VRCLinkingAPI.Client.ApiResponse<WorldSettingsDto> GetGuildWorldWithHttpInfo(string guildId, Guid worldId)
         {
             // verify the required parameter 'guildId' is set
             if (guildId == null)
@@ -751,7 +751,7 @@ namespace VRCLinkingAPI.Api
         /// <param name="worldId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of WorldSettingsDto</returns>
-        public async System.Threading.Tasks.Task<WorldSettingsDto> GetGuildWorldAsync(string guildId, int worldId, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<WorldSettingsDto> GetGuildWorldAsync(string guildId, Guid worldId, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             var task = GetGuildWorldWithHttpInfoAsync(guildId, worldId, cancellationToken);
 #if UNITY_EDITOR || !UNITY_WEBGL
@@ -770,7 +770,7 @@ namespace VRCLinkingAPI.Api
         /// <param name="worldId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (WorldSettingsDto)</returns>
-        public async System.Threading.Tasks.Task<VRCLinkingAPI.Client.ApiResponse<WorldSettingsDto>> GetGuildWorldWithHttpInfoAsync(string guildId, int worldId, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<VRCLinkingAPI.Client.ApiResponse<WorldSettingsDto>> GetGuildWorldWithHttpInfoAsync(string guildId, Guid worldId, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             // verify the required parameter 'guildId' is set
             if (guildId == null)
@@ -972,7 +972,7 @@ namespace VRCLinkingAPI.Api
         /// <param name="worldId"></param>
         /// <param name="updateWorldSettingsRequest"> (optional)</param>
         /// <returns>WorldSettingsDto</returns>
-        public WorldSettingsDto UpdateGuildWorld(string guildId, int worldId, UpdateWorldSettingsRequest updateWorldSettingsRequest = default(UpdateWorldSettingsRequest))
+        public WorldSettingsDto UpdateGuildWorld(string guildId, Guid worldId, UpdateWorldSettingsRequest updateWorldSettingsRequest = default(UpdateWorldSettingsRequest))
         {
             VRCLinkingAPI.Client.ApiResponse<WorldSettingsDto> localVarResponse = UpdateGuildWorldWithHttpInfo(guildId, worldId, updateWorldSettingsRequest);
             return localVarResponse.Data;
@@ -986,7 +986,7 @@ namespace VRCLinkingAPI.Api
         /// <param name="worldId"></param>
         /// <param name="updateWorldSettingsRequest"> (optional)</param>
         /// <returns>ApiResponse of WorldSettingsDto</returns>
-        public VRCLinkingAPI.Client.ApiResponse<WorldSettingsDto> UpdateGuildWorldWithHttpInfo(string guildId, int worldId, UpdateWorldSettingsRequest updateWorldSettingsRequest = default(UpdateWorldSettingsRequest))
+        public VRCLinkingAPI.Client.ApiResponse<WorldSettingsDto> UpdateGuildWorldWithHttpInfo(string guildId, Guid worldId, UpdateWorldSettingsRequest updateWorldSettingsRequest = default(UpdateWorldSettingsRequest))
         {
             // verify the required parameter 'guildId' is set
             if (guildId == null)
@@ -1045,7 +1045,7 @@ namespace VRCLinkingAPI.Api
         /// <param name="updateWorldSettingsRequest"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of WorldSettingsDto</returns>
-        public async System.Threading.Tasks.Task<WorldSettingsDto> UpdateGuildWorldAsync(string guildId, int worldId, UpdateWorldSettingsRequest updateWorldSettingsRequest = default(UpdateWorldSettingsRequest), System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<WorldSettingsDto> UpdateGuildWorldAsync(string guildId, Guid worldId, UpdateWorldSettingsRequest updateWorldSettingsRequest = default(UpdateWorldSettingsRequest), System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             var task = UpdateGuildWorldWithHttpInfoAsync(guildId, worldId, updateWorldSettingsRequest, cancellationToken);
 #if UNITY_EDITOR || !UNITY_WEBGL
@@ -1065,7 +1065,7 @@ namespace VRCLinkingAPI.Api
         /// <param name="updateWorldSettingsRequest"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (WorldSettingsDto)</returns>
-        public async System.Threading.Tasks.Task<VRCLinkingAPI.Client.ApiResponse<WorldSettingsDto>> UpdateGuildWorldWithHttpInfoAsync(string guildId, int worldId, UpdateWorldSettingsRequest updateWorldSettingsRequest = default(UpdateWorldSettingsRequest), System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<VRCLinkingAPI.Client.ApiResponse<WorldSettingsDto>> UpdateGuildWorldWithHttpInfoAsync(string guildId, Guid worldId, UpdateWorldSettingsRequest updateWorldSettingsRequest = default(UpdateWorldSettingsRequest), System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
             // verify the required parameter 'guildId' is set
             if (guildId == null)

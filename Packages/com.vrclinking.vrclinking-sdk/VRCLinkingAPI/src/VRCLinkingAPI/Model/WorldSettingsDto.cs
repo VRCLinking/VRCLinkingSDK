@@ -40,7 +40,6 @@ namespace VRCLinkingAPI.Model
         /// </summary>
         /// <param name="id">id (required).</param>
         /// <param name="name">name (required).</param>
-        /// <param name="urlId">urlId (required).</param>
         /// <param name="requestCount">requestCount (required).</param>
         /// <param name="guildId">guildId (required).</param>
         /// <param name="customData">customData.</param>
@@ -48,7 +47,9 @@ namespace VRCLinkingAPI.Model
         /// <param name="encryption">encryption (required).</param>
         /// <param name="jsonMode">jsonMode (required).</param>
         /// <param name="enabled">enabled (required).</param>
-        public WorldSettingsDto(int id = default(int), string name = default(string), string urlId = default(string), string requestCount = default(string), string guildId = default(string), string customData = default(string), bool compression = default(bool), bool encryption = default(bool), bool jsonMode = default(bool), bool enabled = default(bool))
+        /// <param name="includeDiscordData">includeDiscordData (required).</param>
+        /// <param name="includeGroupData">includeGroupData (required).</param>
+        public WorldSettingsDto(Guid id = default(Guid), string name = default(string), string requestCount = default(string), string guildId = default(string), string customData = default(string), bool compression = default(bool), bool encryption = default(bool), bool jsonMode = default(bool), bool enabled = default(bool), bool includeDiscordData = default(bool), bool includeGroupData = default(bool))
         {
             this.Id = id;
             // to ensure "name" is required (not null)
@@ -57,12 +58,6 @@ namespace VRCLinkingAPI.Model
                 throw new ArgumentNullException("name is a required property for WorldSettingsDto and cannot be null");
             }
             this.Name = name;
-            // to ensure "urlId" is required (not null)
-            if (urlId == null)
-            {
-                throw new ArgumentNullException("urlId is a required property for WorldSettingsDto and cannot be null");
-            }
-            this.UrlId = urlId;
             // to ensure "requestCount" is required (not null)
             if (requestCount == null)
             {
@@ -79,6 +74,8 @@ namespace VRCLinkingAPI.Model
             this.Encryption = encryption;
             this.JsonMode = jsonMode;
             this.Enabled = enabled;
+            this.IncludeDiscordData = includeDiscordData;
+            this.IncludeGroupData = includeGroupData;
             this.CustomData = customData;
         }
 
@@ -86,19 +83,13 @@ namespace VRCLinkingAPI.Model
         /// Gets or Sets Id
         /// </summary>
         [DataMember(Name = "id", IsRequired = true, EmitDefaultValue = true)]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         /// <summary>
         /// Gets or Sets Name
         /// </summary>
         [DataMember(Name = "name", IsRequired = true, EmitDefaultValue = true)]
         public string Name { get; set; }
-
-        /// <summary>
-        /// Gets or Sets UrlId
-        /// </summary>
-        [DataMember(Name = "urlId", IsRequired = true, EmitDefaultValue = true)]
-        public string UrlId { get; set; }
 
         /// <summary>
         /// Gets or Sets RequestCount
@@ -143,6 +134,18 @@ namespace VRCLinkingAPI.Model
         public bool Enabled { get; set; }
 
         /// <summary>
+        /// Gets or Sets IncludeDiscordData
+        /// </summary>
+        [DataMember(Name = "includeDiscordData", IsRequired = true, EmitDefaultValue = true)]
+        public bool IncludeDiscordData { get; set; }
+
+        /// <summary>
+        /// Gets or Sets IncludeGroupData
+        /// </summary>
+        [DataMember(Name = "includeGroupData", IsRequired = true, EmitDefaultValue = true)]
+        public bool IncludeGroupData { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -152,7 +155,6 @@ namespace VRCLinkingAPI.Model
             sb.Append("class WorldSettingsDto {\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
-            sb.Append("  UrlId: ").Append(UrlId).Append("\n");
             sb.Append("  RequestCount: ").Append(RequestCount).Append("\n");
             sb.Append("  GuildId: ").Append(GuildId).Append("\n");
             sb.Append("  CustomData: ").Append(CustomData).Append("\n");
@@ -160,6 +162,8 @@ namespace VRCLinkingAPI.Model
             sb.Append("  Encryption: ").Append(Encryption).Append("\n");
             sb.Append("  JsonMode: ").Append(JsonMode).Append("\n");
             sb.Append("  Enabled: ").Append(Enabled).Append("\n");
+            sb.Append("  IncludeDiscordData: ").Append(IncludeDiscordData).Append("\n");
+            sb.Append("  IncludeGroupData: ").Append(IncludeGroupData).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }

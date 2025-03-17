@@ -86,3 +86,9 @@ Packages/com.vrclinking.vrclinking-sdk/generate-api.bat.meta
 Packages/com.vrclinking.vrclinking-sdk/openapitools.json
 
 Packages/com.vrclinking.vrclinking-sdk/openapitools.json.meta
+
+Packages/com.vrclinking.vrclinking-sdk/generate-api-prod.bat
+
+Packages/com.vrclinking.vrclinking-sdk/generate-api-prod.bat.meta
+
+openapitools.json

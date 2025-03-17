@@ -39,7 +39,9 @@ namespace VRCLinkingAPI.Model
         /// <param name="encryption">encryption.</param>
         /// <param name="jsonMode">jsonMode.</param>
         /// <param name="enabled">enabled.</param>
-        public UpdateWorldSettingsRequest(string name = default(string), string customData = default(string), bool? compression = default(bool?), bool? encryption = default(bool?), bool? jsonMode = default(bool?), bool? enabled = default(bool?))
+        /// <param name="includeDiscordData">includeDiscordData.</param>
+        /// <param name="includeGroupData">includeGroupData.</param>
+        public UpdateWorldSettingsRequest(string name = default(string), string customData = default(string), bool? compression = default(bool?), bool? encryption = default(bool?), bool? jsonMode = default(bool?), bool? enabled = default(bool?), bool? includeDiscordData = default(bool?), bool? includeGroupData = default(bool?))
         {
             this.Name = name;
             this.CustomData = customData;
@@ -47,6 +49,8 @@ namespace VRCLinkingAPI.Model
             this.Encryption = encryption;
             this.JsonMode = jsonMode;
             this.Enabled = enabled;
+            this.IncludeDiscordData = includeDiscordData;
+            this.IncludeGroupData = includeGroupData;
         }
 
         /// <summary>
@@ -86,6 +90,18 @@ namespace VRCLinkingAPI.Model
         public bool? Enabled { get; set; }
 
         /// <summary>
+        /// Gets or Sets IncludeDiscordData
+        /// </summary>
+        [DataMember(Name = "includeDiscordData", EmitDefaultValue = true)]
+        public bool? IncludeDiscordData { get; set; }
+
+        /// <summary>
+        /// Gets or Sets IncludeGroupData
+        /// </summary>
+        [DataMember(Name = "includeGroupData", EmitDefaultValue = true)]
+        public bool? IncludeGroupData { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -99,6 +115,8 @@ namespace VRCLinkingAPI.Model
             sb.Append("  Encryption: ").Append(Encryption).Append("\n");
             sb.Append("  JsonMode: ").Append(JsonMode).Append("\n");
             sb.Append("  Enabled: ").Append(Enabled).Append("\n");
+            sb.Append("  IncludeDiscordData: ").Append(IncludeDiscordData).Append("\n");
+            sb.Append("  IncludeGroupData: ").Append(IncludeGroupData).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -53,7 +54,7 @@ namespace VRCLinking.Editor
             return settings.Worlds;
         }
         
-        public async Task<WorldSettingsDto> GetWorldSettings(string guildId, int worldId)
+        public async Task<WorldSettingsDto> GetWorldSettings(string guildId, Guid worldId)
         {
             var settings = await _worldsApi.GetGuildWorldAsync(guildId, worldId);
             return settings;

@@ -118,7 +118,7 @@ namespace VRCLinkingAPI.Client
         {
             Proxy = null;
             UserAgent = WebUtility.UrlEncode("OpenAPI-Generator/1.0.0/csharp");
-            BasePath = "http://localhost:7720";
+            BasePath = "https://vrclinking.com/api";
             DefaultHeaders = new ConcurrentDictionary<string, string>();
             ApiKey = new ConcurrentDictionary<string, string>();
             ApiKeyPrefix = new ConcurrentDictionary<string, string>();
@@ -126,7 +126,7 @@ namespace VRCLinkingAPI.Client
             {
                 {
                     new Dictionary<string, object> {
-                        {"url", "http://localhost:7720"},
+                        {"url", "https://vrclinking.com/api"},
                         {"description", "No description provided"},
                     }
                 }
@@ -147,7 +147,7 @@ namespace VRCLinkingAPI.Client
             IDictionary<string, string> defaultHeaders,
             IDictionary<string, string> apiKey,
             IDictionary<string, string> apiKeyPrefix,
-            string basePath = "http://localhost:7720") : this()
+            string basePath = "https://vrclinking.com/api") : this()
         {
             if (string.IsNullOrWhiteSpace(basePath))
                 throw new ArgumentException("The provided basePath is invalid.", "basePath");
