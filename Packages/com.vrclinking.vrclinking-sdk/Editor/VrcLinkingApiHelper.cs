@@ -13,7 +13,7 @@ namespace VRCLinking.Editor
 {
     public class VrcLinkingApiHelper
     {
-        const string OauthBaseUrl = "http://localhost:3000/";
+        const string OauthBaseUrl = "https://vrclinking.com/";
         const string TokenEditorPrefKey = "VRCLinking_ApiToken";
         
         TokenAuthApi _tokenAuthApi;
