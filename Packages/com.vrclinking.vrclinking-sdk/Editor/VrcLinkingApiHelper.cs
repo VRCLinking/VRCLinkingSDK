@@ -17,6 +17,7 @@ namespace VRCLinking.Editor
         const string OauthBaseUrl = "https://vrclinking.com/";
         const string TokenEditorPrefKey = "VRCLinking_ApiToken";
         
+        AuthApi _authApi;
         TokenAuthApi _tokenAuthApi;
         UsersApi _usersApi;
         GuildsApi _guildsApi;
@@ -31,6 +32,7 @@ namespace VRCLinking.Editor
         {
             var config = GetConfiguration();
             
+            _authApi = new AuthApi(config);
             _tokenAuthApi = new TokenAuthApi(config);
             _usersApi = new UsersApi(config);
             _guildsApi = new GuildsApi(config);
@@ -88,13 +90,13 @@ namespace VRCLinking.Editor
             }
         }
         
-        public async Task<string> GetTokenUrl()
+        public async Task<string> GetAuthToken()
         {
             var token = await _tokenAuthApi.GetSdkLoginTokenAsync();
             return token.Token;
         }
 
-        public string GetTokenUrl(string token)
+        public string GetAuthTokenUrl(string token)
         {
             return $"{OauthBaseUrl}sdk-oauth?token={token}";
         }
@@ -116,6 +118,12 @@ namespace VRCLinking.Editor
             }
 
             return (AuthStatus.Failed, null);
+        }
+        
+        public async Task Logout()
+        {
+            await _authApi.LogoutAsync();   
+            EditorPrefs.DeleteKey(TokenEditorPrefKey);
         }
 
         public async Task<List<EncodeRole>> GetAllEncodeRoles(string guildId)
