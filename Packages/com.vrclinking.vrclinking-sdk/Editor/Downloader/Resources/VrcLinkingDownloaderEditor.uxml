@@ -1,0 +1,14 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <Style src="project://database/Packages/com.vrclinking.vrclinking-sdk/Editor/Resources/SupporterBoardStyles.uss?fileID=7433441132597879392&amp;guid=a1c50622d58a7ba4ab2b9da5145262c6&amp;type=3#SupporterBoardStyles" />
+    <ui:VisualElement name="Root" style="flex-shrink: 0;">
+        <ui:VisualElement name="Header" class="Header" style="flex-direction: row; align-items: center; background-color: rgba(0, 0, 0, 0.2); padding-top: 8px; padding-right: 12px; padding-bottom: 8px; padding-left: 12px;">
+            <ui:VisualElement name="HeaderIcon" style="background-image: resource(&apos;VRCL Logo NoBackground&apos;); -unity-background-scale-mode: scale-to-fit; width: 64px; height: 64px; flex-shrink: 0;" />
+            <ui:Label tabindex="-1" text="VRC Linking" parse-escape-sequences="true" display-tooltip-when-elided="true" name="HeaderLabel" style="font-size: 30px; color: rgb(68, 197, 228); -unity-font-style: bold; margin-left: 10px; flex-grow: 1; flex-shrink: 1; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;" />
+            <VRCLinking.Editor.LoginField style="flex-grow: 1; flex-shrink: 0;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="Body" class="unity-inspector-element--uie unity-inspector-element--uie-default" style="flex-shrink: 0;">
+            <VRCLinking.Editor.ServerWorldSelection />
+            <VRCLinking.Editor.SelectedWorldField />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

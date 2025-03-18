@@ -1,0 +1,9 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <Style src="project://database/Packages/com.vrclinking.vrclinking-sdk/Editor/Resources/SupporterBoardStyles.uss?fileID=7433441132597879392&amp;guid=a1c50622d58a7ba4ab2b9da5145262c6&amp;type=3#SupporterBoardStyles" />
+    <ui:VisualElement name="LoginPanel" class="panel VariablePanel" style="flex-shrink: 0; height: 64px; flex-grow: 1;">
+        <ui:Label tabindex="-1" text="Not logged in" parse-escape-sequences="true" display-tooltip-when-elided="true" name="LoginStatus" style="-unity-text-align: middle-center; flex-grow: 1;" />
+        <ui:Button text="Login" parse-escape-sequences="true" display-tooltip-when-elided="true" name="LoginButton" />
+        <ui:Button text="Cancel" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CancelLoginButton" />
+        <ui:Button text="Logout" parse-escape-sequences="true" display-tooltip-when-elided="true" name="LogoutButton" />
+    </ui:VisualElement>
+</ui:UXML>
