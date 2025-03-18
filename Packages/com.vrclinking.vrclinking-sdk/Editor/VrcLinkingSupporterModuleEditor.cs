@@ -9,26 +9,33 @@ namespace VRCLinking.Modules.SupporterBoard.Editor
     public class VrcLinkingSupporterModuleEditor : UnityEditor.Editor
     {
 
-        private SerializedProperty propRoleList;
         private SerializedProperty propSupporterBoardText;
         private SerializedProperty propScrollSpeed;
         private SerializedProperty propScrollWait;
         private SerializedProperty propMaskRect;
         private SerializedProperty propContentRect;
 
+        private SerializedObject serializeHelper;
+        private SerializedProperty propRoleList;
+        
         private ListView RoleListView;
         private VisualElement VariableContainer;
         private VisualElement ReferencesFoldout;
+        
 
 
         private void OnEnable()
         {
-            propRoleList = serializedObject.FindProperty(nameof(VrcLinkingSupporterModule.roleList));
             propSupporterBoardText = serializedObject.FindProperty(nameof(VrcLinkingSupporterModule.supporterBoardText));
             propScrollSpeed = serializedObject.FindProperty(nameof(VrcLinkingSupporterModule.scrollSpeed));
             propScrollWait = serializedObject.FindProperty(nameof(VrcLinkingSupporterModule.scrollWait));
             propMaskRect = serializedObject.FindProperty(nameof(VrcLinkingSupporterModule.maskRect));
             propContentRect = serializedObject.FindProperty(nameof(VrcLinkingSupporterModule.contentRect));
+
+            VrcLinkingSupporterModuleHelper helper = 
+                ((VrcLinkingSupporterModule)target).GetComponent<VrcLinkingSupporterModuleHelper>();
+            serializeHelper = new SerializedObject(helper);
+            propRoleList = serializeHelper.FindProperty(nameof(VrcLinkingSupporterModuleHelper.roleList));
         }
 
         public override VisualElement CreateInspectorGUI()

@@ -12,10 +12,11 @@ namespace VRCLinking.Modules.SupporterBoard.Editor
         {
             VrcLinkingSupporterModule[] modules =
                 FindObjectsByType<VrcLinkingSupporterModule>(FindObjectsInactive.Include, FindObjectsSortMode.None);
-
+            
             foreach (VrcLinkingSupporterModule module in modules)
             {
-                module.roles = SupporterUtilities.ConvertToDataList(module.roleList);
+                VrcLinkingSupporterModuleHelper helper = module.GetComponent<VrcLinkingSupporterModuleHelper>(); 
+                module.roles = SupporterUtilities.ConvertToDataList(helper.roleList);
             }
         }
     }

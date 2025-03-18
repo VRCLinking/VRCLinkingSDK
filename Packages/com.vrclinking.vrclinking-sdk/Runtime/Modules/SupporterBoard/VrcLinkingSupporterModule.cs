@@ -9,14 +9,12 @@ using VRCLinking.Utilitites;
 
 namespace VRCLinking.Modules.SupporterBoard
 {
+    [RequireComponent(typeof(VrcLinkingSupporterModuleHelper))]
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     public class VrcLinkingSupporterModule : VrcLinkingModuleBase
     {
         public TextMeshProUGUI supporterBoardText;
         
-        #if !COMPILER_UDONSHARP
-        public List<SupporterRole> roleList = new List<SupporterRole>();
-        #endif
 
         [OdinSerialize] public DataList roles;
 
