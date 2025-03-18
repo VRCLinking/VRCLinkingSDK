@@ -18,6 +18,11 @@ namespace VRCLinking
 
         public LzwCompressor compressor;
 
+        public string serverName;
+        public string serverId;
+        public string worldName;
+        public Guid worldId;
+
 
         void Start()
         {
