@@ -1,7 +1,13 @@
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using NUnit.Framework;
 using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
+using VRCLinking.Editor;
+using VRCLinkingAPI.Model;
 
 namespace VRCLinking.Modules.SupporterBoard.Editor
 {
@@ -21,7 +27,10 @@ namespace VRCLinking.Modules.SupporterBoard.Editor
         private ListView RoleListView;
         private VisualElement VariableContainer;
         private VisualElement ReferencesFoldout;
-        
+        VrcLinkingSupporterModuleHelper _helper;
+
+        public static List<string> RoleNames = new List<string>();
+        public static List<EncodeRole> Roles = new List<EncodeRole>();
 
 
         private void OnEnable()
@@ -32,10 +41,11 @@ namespace VRCLinking.Modules.SupporterBoard.Editor
             propMaskRect = serializedObject.FindProperty(nameof(VrcLinkingSupporterModule.maskRect));
             propContentRect = serializedObject.FindProperty(nameof(VrcLinkingSupporterModule.contentRect));
 
-            VrcLinkingSupporterModuleHelper helper = 
-                ((VrcLinkingSupporterModule)target).GetComponent<VrcLinkingSupporterModuleHelper>();
-            serializeHelper = new SerializedObject(helper);
+            _helper = ((VrcLinkingSupporterModule)target).GetComponent<VrcLinkingSupporterModuleHelper>();
+            serializeHelper = new SerializedObject(_helper);
             propRoleList = serializeHelper.FindProperty(nameof(VrcLinkingSupporterModuleHelper.roleList));
+            
+            _ = LoadRoles();
         }
 
         public override VisualElement CreateInspectorGUI()
@@ -56,8 +66,55 @@ namespace VRCLinking.Modules.SupporterBoard.Editor
             ReferencesFoldout.Add(new PropertyField(propContentRect));
             
             RoleListView.BindProperty(propRoleList);
+            RoleListView.itemsAdded += (evt) =>
+            {
+                foreach (var item in evt)
+                {
+                    _helper.roleList[item] = new SupporterRole();
+                }
+            };
             
             return root;
+        }
+
+        private async Task LoadRoles()
+        {
+            try
+            {
+                var apiHelper = new VrcLinkingApiHelper();
+                var downloader = GetDownloader();
+                
+                if (downloader == null || downloader.serverId == null)
+                {
+                    Debug.LogError("VrcLinkingDownloader is not properly set.");
+                    return;
+                }
+
+                if (! (await apiHelper.IsUserLoggedIn()))
+                {
+                    Debug.LogError("User is not logged in.");
+                    return;
+                }
+
+                var roles = await apiHelper.GetAllEncodeRoles(downloader.serverId);
+                
+                Roles = roles;
+                RoleNames.Clear();
+                foreach (var role in roles)
+                {
+                    RoleNames.Add(role.Name);
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e);
+                throw;
+            }
+        }
+        
+        private VrcLinkingDownloader GetDownloader()
+        {
+            return FindObjectOfType<VrcLinkingDownloader>(true);
         }
     }
 }

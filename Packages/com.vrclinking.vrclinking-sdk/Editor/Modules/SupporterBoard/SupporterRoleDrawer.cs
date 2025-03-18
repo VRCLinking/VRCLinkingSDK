@@ -6,6 +6,7 @@ using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Random = UnityEngine.Random;
 
 namespace VRCLinking.Modules.SupporterBoard.Editor
 {
@@ -19,9 +20,6 @@ namespace VRCLinking.Modules.SupporterBoard.Editor
 
         public override VisualElement CreatePropertyGUI(SerializedProperty property)
         {
-            List<string> dropdownChoices = new List<string>(){"Role 1", "Role 2", "Fake Gamer"};
-            List<string> roleChoices = new List<string>(){"ARole 1", "BRole 2", "CFake Gamer"};
-
             // Find serialized properties.
             SerializedProperty propRoleType = property.FindPropertyRelative(nameof(SupporterRole.roleType));
             SerializedProperty propRoleValue = property.FindPropertyRelative(nameof(SupporterRole.roleValue));
@@ -55,8 +53,12 @@ namespace VRCLinking.Modules.SupporterBoard.Editor
             roleSizeField.BindProperty(propRoleRelativeSize);
 
             roleTypeField.RegisterValueChangedCallback(_ => ValidateRoleField());
-            roleSelectionField.choices = dropdownChoices;
-            roleSelectionField.RegisterValueChangedCallback(evt => SetRoleValue(dropdownChoices.IndexOf(evt.newValue)));
+            roleSelectionField.choices = VrcLinkingSupporterModuleEditor.RoleNames;
+            roleSelectionField.RegisterValueChangedCallback(evt =>
+            {
+                
+                SetRoleValue(VrcLinkingSupporterModuleEditor.Roles.FindIndex(x => x.Name == evt.newValue));
+            });
             roleColorField.RegisterValueChangedCallback(_ => MatchColor());
 
 
@@ -75,16 +77,24 @@ namespace VRCLinking.Modules.SupporterBoard.Editor
 
             void SetRoleValue(int index)
             {
-                nameIdField.value = roleChoices[index];
+                nameIdField.value = VrcLinkingSupporterModuleEditor.Roles[index].Name;
             }
             
             void ValidateRoleField()
             {
-                RoleType roleType = (RoleType)propRoleType.enumValueIndex;
+                try
+                {
+                    RoleType roleType = (RoleType)propRoleType.enumValueIndex;
 
-                nameIdField.SetEnabled(roleType != RoleType.RoleLink);
-                roleSelectionField.style.display =
-                    (roleType == RoleType.RoleLink) ? DisplayStyle.Flex : DisplayStyle.None;
+                    nameIdField.SetEnabled(roleType != RoleType.RoleLink);
+                    roleSelectionField.style.display =
+                        (roleType == RoleType.RoleLink) ? DisplayStyle.Flex : DisplayStyle.None;
+                }
+                catch
+                {
+                    // ignored
+                }
+
             }
         }
     }

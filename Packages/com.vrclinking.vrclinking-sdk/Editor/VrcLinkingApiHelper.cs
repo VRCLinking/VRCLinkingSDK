@@ -81,7 +81,14 @@ namespace VRCLinking.Editor
                 {
                     return false;
                 }
-                await GetCurrentUser();
+
+                var user = await GetCurrentUser();
+                if (string.IsNullOrEmpty(user.Id) || user.Id == "0")
+                {
+                    return false;
+                }
+                
+                Debug.Log(user.Id);
                 return true;
             }
             catch (ApiException e)
