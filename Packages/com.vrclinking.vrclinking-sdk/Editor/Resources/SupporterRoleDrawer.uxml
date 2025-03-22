@@ -10,7 +10,8 @@
                 <ui:TextField picking-mode="Ignore" label="Role Id" value="filler text" name="NameIdField" style="flex-grow: 1;" />
                 <ui:DropdownField choices="Role1,Role2,Role3" index="0" name="RoleSelectionField" />
             </ui:VisualElement>
-            <ui:TextField picking-mode="Ignore" label="Role Title" name="RoleTitleField" />
+            <ui:TextField picking-mode="Ignore" label="Title" name="RoleTitleField" style="height: 18px;" />
+            <ui:FloatField label="Title Relative Size" value="42.2" name="RoleTitleSizeField" />
             <ui:TextField picking-mode="Ignore" label="Separator" value="filler text" name="SeparatorField" />
             <ui:FloatField label="Relative Size" value="42.2" name="RoleSizeField" />
             <uie:ColorField label="Color" value="RGBA(0.000, 1.000, 1.000, 1.000)" name="RoleColorField" show-alpha="false" show-eye-dropper="false" />
