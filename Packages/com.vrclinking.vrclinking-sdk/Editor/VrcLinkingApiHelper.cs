@@ -88,7 +88,6 @@ namespace VRCLinking.Editor
                     return false;
                 }
                 
-                Debug.Log(user.Id);
                 return true;
             }
             catch (ApiException e)

@@ -23,11 +23,17 @@ namespace VRCLinking.Modules.SupporterBoard.Editor
 
         private SerializedObject serializeHelper;
         private SerializedProperty propRoleList;
+
+        VisualElement NoDownloaderDisplay;
+        VisualElement Body;
+
+        Button SetupDownloaderButton;
         
         private ListView RoleListView;
         private VisualElement VariableContainer;
         private VisualElement ReferencesFoldout;
         VrcLinkingSupporterModuleHelper _helper;
+        VrcLinkingDownloader _downloader;
 
         public static List<string> RoleNames = new List<string>();
         public static List<EncodeRole> Roles = new List<EncodeRole>();
@@ -59,6 +65,35 @@ namespace VRCLinking.Modules.SupporterBoard.Editor
             VariableContainer = root.Q<VisualElement>(nameof(VariableContainer));
             ReferencesFoldout = root.Q<Foldout>(nameof(ReferencesFoldout));
 
+            NoDownloaderDisplay = root.Q<VisualElement>(nameof(NoDownloaderDisplay));
+            Body = root.Q<VisualElement>(nameof(Body));
+            SetupDownloaderButton = root.Q<Button>(nameof(SetupDownloaderButton));
+            
+            SetupDownloaderButton.clicked += () =>
+            {
+                var downloader = GetDownloader();
+
+                if (downloader != null)
+                {
+                    _downloader = downloader;
+                    
+                    Selection.activeGameObject = downloader.gameObject;
+                    return;
+                }
+                
+                var newGameObject = new GameObject("VrcLinkingDownloader");
+                newGameObject.AddComponent<VrcLinkingDownloader>();
+                _downloader = newGameObject.GetComponent<VrcLinkingDownloader>();
+                
+                Selection.activeGameObject = newGameObject;
+            };
+
+            if (_downloader == null || _downloader.worldId == Guid.Empty || string.IsNullOrEmpty(_downloader.serverId))
+            {
+                NoDownloaderDisplay.SetDisplay(true);
+                Body.SetDisplay(false);
+            }
+            
             VariableContainer.Add(new PropertyField(propScrollSpeed));
             VariableContainer.Add(new PropertyField(propScrollWait));
             ReferencesFoldout.Add(new PropertyField(propSupporterBoardText));
@@ -82,9 +117,9 @@ namespace VRCLinking.Modules.SupporterBoard.Editor
             try
             {
                 var apiHelper = new VrcLinkingApiHelper();
-                var downloader = GetDownloader();
-                
-                if (downloader == null || downloader.serverId == null)
+                _downloader = GetDownloader();
+
+                if (_downloader == null || string.IsNullOrEmpty(_downloader.serverId) || _downloader.worldId == Guid.Empty)
                 {
                     Debug.LogError("VrcLinkingDownloader is not properly set.");
                     return;
@@ -96,7 +131,7 @@ namespace VRCLinking.Modules.SupporterBoard.Editor
                     return;
                 }
 
-                var roles = await apiHelper.GetAllEncodeRoles(downloader.serverId);
+                var roles = await apiHelper.GetAllEncodeRoles(_downloader.serverId);
                 
                 Roles = roles;
                 RoleNames.Clear();

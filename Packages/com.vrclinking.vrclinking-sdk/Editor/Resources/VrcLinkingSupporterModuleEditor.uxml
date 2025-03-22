@@ -5,7 +5,11 @@
             <ui:VisualElement name="HeaderIcon" style="background-image: resource(&apos;VRCL Logo NoBackground&apos;); -unity-background-scale-mode: scale-to-fit; width: 64px; height: 64px;" />
             <ui:Label tabindex="-1" text="VRC Linking" parse-escape-sequences="true" display-tooltip-when-elided="true" name="HeaderLabel" style="font-size: 30px; color: rgb(68, 197, 228); -unity-font-style: bold; margin-left: 10px;" />
         </ui:VisualElement>
-        <ui:VisualElement name="Body" class="unity-inspector-element--uie unity-inspector-element--uie-default" style="flex-shrink: 0;">
+        <ui:VisualElement name="NoDownloaderDisplay" style="flex-grow: 1; display: none;">
+            <ui:Label tabindex="-1" text="Downloader not found" parse-escape-sequences="true" display-tooltip-when-elided="true" style="font-size: 24px; -unity-text-align: upper-center; color: rgb(255, 35, 35);" />
+            <ui:Button text="Click here to Setup Downloader" parse-escape-sequences="true" display-tooltip-when-elided="true" name="SetupDownloaderButton" style="height: 59px; font-size: 15px;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="Body" class="unity-inspector-element--uie unity-inspector-element--uie-default" style="flex-shrink: 0; display: flex;">
             <ui:VisualElement name="VariablePanel" class="panel VariablePanel" style="flex-grow: 1; flex-shrink: 0;">
                 <ui:VisualElement name="VariableContainer" style="flex-grow: 1;" />
                 <ui:Foldout text="References" name="ReferencesFoldout" view-data-key="VrcLinkingSupporterBoardReferences" style="margin-left: 14px;" />
