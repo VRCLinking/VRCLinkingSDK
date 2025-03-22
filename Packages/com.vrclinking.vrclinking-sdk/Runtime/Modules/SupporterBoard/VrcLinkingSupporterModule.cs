@@ -42,11 +42,20 @@ namespace VRCLinking.Modules.SupporterBoard
                 var role = roles[ir].DataDictionary;
                 var roleType = (RoleType)role["roleType"].Int;
                 var rank = role["roleValue"].String;
+                var roleTitle = role["roleTitle"].String;
+                var roleTitleSize = role["roleTitleRelativeSize"].Float;
                 var nameSeparator = role["roleSeparator"].String;
                 var roleRelativeSize = role["roleRelativeSize"].Float;
-
+                
                 sb.Append($"<color={((Color)role["roleColor"].Reference).ToHex()}>");
+                if (roleTitle != "")
+                {
+                    sb.Append($"<align=center><size={roleTitleSize}%>");
+                    sb.Append($"<b>{roleTitle}</b>\n");
+                    sb.Append($"</size></align>");
+                }
                 sb.Append($"<size={roleRelativeSize}%>");
+
 
                 if (roleType == RoleType.RoleId)
                 {

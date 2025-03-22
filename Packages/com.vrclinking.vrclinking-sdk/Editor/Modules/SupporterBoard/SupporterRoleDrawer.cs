@@ -25,8 +25,9 @@ namespace VRCLinking.Modules.SupporterBoard.Editor
             SerializedProperty propRoleValue = property.FindPropertyRelative(nameof(SupporterRole.roleValue));
             SerializedProperty propRoleColor = property.FindPropertyRelative(nameof(SupporterRole.roleColor));
             SerializedProperty propRoleSeparator = property.FindPropertyRelative(nameof(SupporterRole.roleSeparator));
-            SerializedProperty propRoleRelativeSize =
-                property.FindPropertyRelative(nameof(SupporterRole.roleRelativeSize));
+            SerializedProperty propRoleRelativeSize = property.FindPropertyRelative(nameof(SupporterRole.roleRelativeSize));
+            SerializedProperty propRoleTitle = property.FindPropertyRelative(nameof(SupporterRole.roleTitle));
+            SerializedProperty propRoleTitleRelativeSize = property.FindPropertyRelative(nameof(SupporterRole.roleTitleRelativeSize));
 
 
             // Create and find elements.
@@ -39,15 +40,20 @@ namespace VRCLinking.Modules.SupporterBoard.Editor
             Label headerLabel = root.Q<Label>("HeaderLabel");
             EnumField roleTypeField = root.Q<EnumField>("RoleTypeField");
             TextField nameIdField = root.Q<TextField>("NameIdField");
+            TextField roleTitleField = root.Q<TextField>("RoleTitleField");
+            FloatField roleTitleSizeField = root.Q<FloatField>("RoleTitleSizeField");
             DropdownField roleSelectionField = root.Q<DropdownField>("RoleSelectionField");
             ColorField roleColorField = root.Q<ColorField>("RoleColorField");
             TextField roleSeparatorField = root.Q<TextField>("SeparatorField");
             FloatField roleSizeField = root.Q<FloatField>("RoleSizeField");
+            
 
 
             // Bind elements.
             roleTypeField.BindProperty(propRoleType);
             nameIdField.BindProperty(propRoleValue);
+            roleTitleField.BindProperty(propRoleTitle);
+            roleTitleSizeField.BindProperty(propRoleTitleRelativeSize);
             roleColorField.BindProperty(propRoleColor);
             roleSeparatorField.BindProperty(propRoleSeparator);
             roleSizeField.BindProperty(propRoleRelativeSize);

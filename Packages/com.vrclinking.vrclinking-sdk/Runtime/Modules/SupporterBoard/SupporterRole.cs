@@ -11,5 +11,7 @@ namespace VRCLinking.Modules.SupporterBoard
         public Color roleColor = Color.white;
         public string roleSeparator = ", ";
         public float roleRelativeSize = 100f;
+        public string roleTitle = "";
+        public float roleTitleRelativeSize = 125f;
     }
 }
