@@ -14,7 +14,7 @@ namespace VRCLinking.Modules.SupporterBoard
     public class VrcLinkingSupporterModule : VrcLinkingModuleBase
     {
         public TextMeshProUGUI supporterBoardText;
-        
+
 
         [OdinSerialize] public DataList roles;
 
@@ -34,7 +34,7 @@ namespace VRCLinking.Modules.SupporterBoard
                 Log("Supporter Board Text is not set.");
                 return;
             }
-            
+
 
             var sb = new StringBuilder();
             for (var ir = 0; ir < roles.Count; ir++)
@@ -62,7 +62,7 @@ namespace VRCLinking.Modules.SupporterBoard
                         }
                     }
                 }
-                else if (roleType == RoleType.RoleName)
+                else if (roleType == RoleType.RoleName || roleType == RoleType.RoleLink)
                 {
                     if (downloader.TryGetGuildMembersByRoleName(rank, out DataList members))
                     {
@@ -76,7 +76,6 @@ namespace VRCLinking.Modules.SupporterBoard
                         }
                     }
                 }
-
 
                 sb.Append("</color>");
                 sb.Append("</size>");

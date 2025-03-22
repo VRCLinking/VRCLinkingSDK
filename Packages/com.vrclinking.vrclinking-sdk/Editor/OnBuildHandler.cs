@@ -3,7 +3,9 @@ using System.Linq;
 using UnityEditor.Callbacks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using VRC.SDKBase;
 using VRCLinking.Modules;
+using VRCLinking.Utilities;
 
 namespace VRCLinking.Editor
 {
@@ -17,13 +19,23 @@ namespace VRCLinking.Editor
             if (downloader == null)
             {
                 return;
-                
-                
             }
+
+            var lzwCompressor = downloader.GetComponent<LzwCompressor>();
+            
+            if (lzwCompressor == null)
+            {
+                lzwCompressor = downloader.gameObject.AddComponent<LzwCompressor>();
+            }
+            
+            downloader.compressor = lzwCompressor;
+            
+            downloader.mainUrl = new VRCUrl("https://data.vrclinking.com/v2/" + downloader.worldId);
+            downloader.fallbackUrl = new VRCUrl("https://data.vrclinking.com/v2/" + downloader.worldId);
             
             var modules = objects.Select(o => o.GetComponent<VrcLinkingModuleBase>()).Where(o => o != null).ToArray();
 
-            downloader.GetComponent<VrcLinkingDownloader>().modules = modules;
+            downloader.modules = modules;
 
             foreach (var module in modules)
             {

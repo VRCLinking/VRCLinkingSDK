@@ -19,8 +19,6 @@ namespace VRCLinking
         public void ParseData(string input)
         {
             _checksum = ParseChecksum(input);
-            input = CleanData(input);
-            
             
             VRCJson.TryDeserializeFromJson(input, out var dataOut);
 
@@ -54,35 +52,7 @@ namespace VRCLinking
         
         string ParseChecksum(string input)
         {
-            var firstBracket = input.IndexOf('{');
-            var firstSquareBracket = input.IndexOf('[');
-            var firstBracketIndex = firstBracket == -1 ? firstSquareBracket : firstSquareBracket == -1 ? firstBracket : firstBracket < firstSquareBracket ? firstBracket : firstSquareBracket;
-            
-            if (firstBracketIndex == -1)
-            {
-                return string.Empty;
-            }
-            
-            if (firstBracketIndex > 32)
-            {
-                return string.Empty;
-            }
-            
-            return input.Substring(0, firstBracketIndex);
-        }
-        
-        string CleanData(string input)
-        {
-            var firstBracket = input.IndexOf('{');
-            var firstSquareBracket = input.IndexOf('[');
-            var firstBracketIndex = firstBracket == -1 ? firstSquareBracket : firstSquareBracket == -1 ? firstBracket : firstBracket < firstSquareBracket ? firstBracket : firstSquareBracket;
-            
-            if (firstBracketIndex == -1)
-            {
-                return input;
-            }
-            
-            return input.Substring(firstBracketIndex);
+            return string.Empty;
         }
     }
 }

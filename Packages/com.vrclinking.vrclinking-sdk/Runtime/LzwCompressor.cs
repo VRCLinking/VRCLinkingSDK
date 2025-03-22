@@ -7,6 +7,7 @@ using Debug = UnityEngine.Debug;
 
 namespace VRCLinking.Utilities
 {
+    [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     public class LzwCompressor : UdonSharpBehaviour
     {
         private const int MAX_BITS = 14; //maimxum bits allowed to read

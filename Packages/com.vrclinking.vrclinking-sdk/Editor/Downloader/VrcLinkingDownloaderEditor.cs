@@ -2,6 +2,7 @@ using System;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
+using VRC.SDKBase;
 
 namespace VRCLinking.Editor
 {
@@ -107,8 +108,10 @@ namespace VRCLinking.Editor
 
             _script.serverName = worldData.ServerName;
             _script.serverId = worldData.ServerId;
-            _script.worldName = worldData.WorldName;
+            _script.worldName = worldData.WorldName; 
             _script.worldId = worldData.WorldId;
+            _script.mainUrl = new VRCUrl("https://data.vrclinking.com/v2/" + worldData.WorldId);
+            _script.fallbackUrl = new VRCUrl("https://data.vrclinking.com/v2/" + worldData.WorldId); // TODO: Change this to a fallback URL.
 
             PrefabUtility.RecordPrefabInstancePropertyModifications(_script);
         }

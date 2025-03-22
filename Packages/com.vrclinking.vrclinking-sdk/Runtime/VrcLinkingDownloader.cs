@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Text;
 using TMPro;
 using UdonSharp;
+using UnityEngine;
 using VRC.SDK3.StringLoading;
 using VRC.SDKBase;
 using VRC.Udon.Common.Interfaces;
@@ -11,10 +12,13 @@ using Debug = UnityEngine.Debug;
 
 namespace VRCLinking
 {   
+    [RequireComponent(typeof(LzwCompressor))]
+    [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     public partial class VrcLinkingDownloader : UdonSharpBehaviour
     {
         public VRCUrl mainUrl;
         public VRCUrl fallbackUrl;
+        bool _isLoadingFallback = false;
 
         public LzwCompressor compressor;
 
@@ -26,26 +30,31 @@ namespace VRCLinking
 
         void Start()
         {
-            Debug.Log("Start");
+            Log($"Downloading From: {mainUrl}");
             VRCStringDownloader.LoadUrl(mainUrl, (IUdonEventReceiver)this);
+
+            if (compressor == null)
+            {
+                compressor = GetComponent<LzwCompressor>();
+                
+                if (compressor == null)
+                {
+                    LogError("Compressor is not set.");
+                    return;
+                }
+            }
         }
 
-        Stopwatch sw = new Stopwatch();
 
         public override void OnStringLoadSuccess(IVRCStringDownload result)
         {
-            sw = System.Diagnostics.Stopwatch.StartNew();
             if (result.Error != null)
             {
                 Debug.LogError("Failed to download string: " + result.Error);
                 return;
             }
 
-            Debug.Log("Downloaded string: " + result.Result.Length + " bytes");
-
             var unicode = Encoding.Unicode.GetBytes(result.Result);
-            Debug.Log("ToArray time: " + sw.ElapsedMilliseconds + "ms");
-
 
             compressor.StartDecompression(unicode, (IUdonEventReceiver)this, nameof(OnDecompressionSuccess));
         }
@@ -53,16 +62,21 @@ namespace VRCLinking
         public override void OnStringLoadError(IVRCStringDownload result)
         {
             Debug.LogError("Failed to download string: " + result.Error);
+
+            if (_isLoadingFallback)
+            {
+                LogError("Failed to download from fallback url.");
+                return;
+            }
+            
+            VRCStringDownloader.LoadUrl(fallbackUrl, (IUdonEventReceiver)this);
+            _isLoadingFallback = true;
         }
 
         public void OnDecompressionSuccess()
         {
-            Debug.Log("Decompression success");
-            var bytesLength = compressor.GetDecompressedData().Length;
             var textData = Encoding.UTF8.GetString(compressor.GetDecompressedData());
 
-            Debug.Log($"Result bytes: {compressor.GetDecompressedData().Length}");
-            Debug.Log($"Decompression time: {sw.ElapsedMilliseconds}ms");
             ParseData(textData);
         }
         
