@@ -31,7 +31,7 @@ namespace VRCLinking.Editor
             downloader.compressor = lzwCompressor;
             
             downloader.mainUrl = new VRCUrl("https://data.vrclinking.com/v2/" + downloader.worldId);
-            downloader.fallbackUrl = new VRCUrl("https://data.vrclinking.com/v2/" + downloader.worldId);
+            downloader.fallbackUrl = new VRCUrl("https://linkingbotvrchat.github.io/v2data/worlds/" + downloader.worldId);
             
             var modules = objects.Select(o => o.GetComponent<VrcLinkingModuleBase>()).Where(o => o != null).ToArray();
 

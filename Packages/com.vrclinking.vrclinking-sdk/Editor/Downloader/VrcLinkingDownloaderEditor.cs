@@ -111,7 +111,7 @@ namespace VRCLinking.Editor
             _script.worldName = worldData.WorldName; 
             _script.worldId = worldData.WorldId;
             _script.mainUrl = new VRCUrl("https://data.vrclinking.com/v2/" + worldData.WorldId);
-            _script.fallbackUrl = new VRCUrl("https://data.vrclinking.com/v2/" + worldData.WorldId); // TODO: Change this to a fallback URL.
+            _script.fallbackUrl = new VRCUrl("https://linkingbotvrchat.github.io/v2data/worlds/" + worldData.WorldId);
 
             PrefabUtility.RecordPrefabInstancePropertyModifications(_script);
         }
