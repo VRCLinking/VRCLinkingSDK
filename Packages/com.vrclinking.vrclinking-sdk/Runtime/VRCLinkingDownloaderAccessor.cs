@@ -14,12 +14,12 @@ namespace VRCLinking
                 return false;
             }
 
-            if (!_parsedData.ContainsKey("GuildUsers") || _parsedData["GuildUsers"].TokenType != TokenType.DataDictionary)
+            if (!parsedData.ContainsKey("GuildUsers") || parsedData["GuildUsers"].TokenType != TokenType.DataDictionary)
             {
                 return false;
             }
 
-            var guildUsers = _parsedData["GuildUsers"].DataDictionary;
+            var guildUsers = parsedData["GuildUsers"].DataDictionary;
             if (!guildUsers.ContainsKey(roleName) || guildUsers[roleName].TokenType != TokenType.DataList)
             {
                 return false;
@@ -38,12 +38,12 @@ namespace VRCLinking
                 return false;
             }
 
-            if (!_parsedData.ContainsKey("GuildUsers") || _parsedData["GuildUsers"].TokenType != TokenType.DataDictionary)
+            if (!parsedData.ContainsKey("GuildUsers") || parsedData["GuildUsers"].TokenType != TokenType.DataDictionary)
             {
                 return false;
             }
 
-            var guildUsers = _parsedData["GuildUsers"].DataDictionary;
+            var guildUsers = parsedData["GuildUsers"].DataDictionary;
             if (!guildUsers.ContainsKey(roleName) || guildUsers[roleName].TokenType != TokenType.DataList)
             {
                 return false;
@@ -66,14 +66,14 @@ namespace VRCLinking
                 return false;
             }
 
-            if (!_parsedData.ContainsKey("GuildRoleMap") || _parsedData["GuildRoleMap"].TokenType != TokenType.DataDictionary)
+            if (!parsedData.ContainsKey("GuildRoleMap") || parsedData["GuildRoleMap"].TokenType != TokenType.DataDictionary)
             {
                 return false;
             }
             
-            var guildRoleMap = _parsedData["GuildRoleMap"].DataDictionary;
+            var guildRoleMap = parsedData["GuildRoleMap"].DataDictionary;
             
-            if (!guildRoleMap.ContainsKey(roleId) || !_parsedData.ContainsKey("GuildUsers") || _parsedData["GuildUsers"].TokenType != TokenType.DataDictionary)
+            if (!guildRoleMap.ContainsKey(roleId) || !parsedData.ContainsKey("GuildUsers") || parsedData["GuildUsers"].TokenType != TokenType.DataDictionary)
             {
                 return false;
             }
@@ -92,14 +92,14 @@ namespace VRCLinking
                 return false;
             }
 
-            if (!_parsedData.ContainsKey("GuildRoleMap") || _parsedData["GuildRoleMap"].TokenType != TokenType.DataDictionary)
+            if (!parsedData.ContainsKey("GuildRoleMap") || parsedData["GuildRoleMap"].TokenType != TokenType.DataDictionary)
             {
                 return false;
             }
             
-            var guildRoleMap = _parsedData["GuildRoleMap"].DataDictionary;
+            var guildRoleMap = parsedData["GuildRoleMap"].DataDictionary;
             
-            if (!guildRoleMap.ContainsKey(roleId) || !_parsedData.ContainsKey("GuildUsers") || _parsedData["GuildUsers"].TokenType != TokenType.DataDictionary)
+            if (!guildRoleMap.ContainsKey(roleId) || !parsedData.ContainsKey("GuildUsers") || parsedData["GuildUsers"].TokenType != TokenType.DataDictionary)
             {
                 return false;
             }

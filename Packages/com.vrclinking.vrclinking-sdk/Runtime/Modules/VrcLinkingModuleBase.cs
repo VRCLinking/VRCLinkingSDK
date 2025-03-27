@@ -1,10 +1,11 @@
 ﻿using UdonSharp;
+using UnityEngine;
 
 namespace VRCLinking.Modules
 {
     public class VrcLinkingModuleBase : UdonSharpBehaviour
     {
-        public VrcLinkingDownloader downloader;
+        [HideInInspector] public VrcLinkingDownloader downloader;
         
         /// <summary>
         /// The name of the module.
@@ -23,6 +24,15 @@ namespace VRCLinking.Modules
         private protected void Log(object message)
         {
             UnityEngine.Debug.Log($"[{ModuleName}-{gameObject.name}] {message}");
+        }
+        
+        /// <summary>
+        /// Module based Error Logging.
+        /// </summary>
+        /// <param name="message"></param>
+        private protected void LogError(object message)
+        {
+            UnityEngine.Debug.LogError($"[{ModuleName}-{gameObject.name}] {message}");
         }
     }
 }

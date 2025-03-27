@@ -1,11 +1,14 @@
-﻿using VRC.SDK3.Data;
+﻿using System;
+using UnityEngine;
+using UnityEngine.Serialization;
+using VRC.SDK3.Data;
 using VRCLinking.Modules;
 
 namespace VRCLinking
 {
     public partial class VrcLinkingDownloader
     {
-        DataDictionary _parsedData;
+        [NonSerialized] public DataDictionary parsedData;
         bool _isDataValid;
         string _checksum;
         
@@ -34,10 +37,10 @@ namespace VRCLinking
                 return;
             }
 
-            _parsedData = dataOut.DataDictionary;
+            parsedData = dataOut.DataDictionary;
             foreach (var key in _requiredKeys)
             {
-                if (!_parsedData.ContainsKey(key))
+                if (!parsedData.ContainsKey(key))
                 {
                     _isDataValid = false;
                     LogError($"Missing required key in JSON: {key}");
