@@ -1,1 +1,0 @@
-openapi-generator-cli generate -i http://localhost:7720/swagger/v1/swagger.json --generator-name csharp -o VRCLinkingAPI --package-name VRCLinkingAPI --library httpclientAPI --library unityWebRequest --additional-properties=targetFramework=net47
