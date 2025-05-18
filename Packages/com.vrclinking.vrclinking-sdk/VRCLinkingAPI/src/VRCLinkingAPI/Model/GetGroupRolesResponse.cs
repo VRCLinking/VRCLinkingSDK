@@ -42,7 +42,7 @@ namespace VRCLinkingAPI.Model
         /// <param name="guildRoles">guildRoles (required).</param>
         /// <param name="groupRoles">groupRoles (required).</param>
         /// <param name="linkedGroupRoles">linkedGroupRoles (required).</param>
-        public GetGroupRolesResponse(GroupLinkedRole everyoneRole = default(GroupLinkedRole), List<Role> guildRoles = default(List<Role>), List<GroupRole> groupRoles = default(List<GroupRole>), List<GroupLinkedRole> linkedGroupRoles = default(List<GroupLinkedRole>))
+        public GetGroupRolesResponse(GroupLinkedRole everyoneRole = default(GroupLinkedRole), List<DiscordRoleDto> guildRoles = default(List<DiscordRoleDto>), List<GroupRole> groupRoles = default(List<GroupRole>), List<GroupLinkedRole> linkedGroupRoles = default(List<GroupLinkedRole>))
         {
             // to ensure "everyoneRole" is required (not null)
             if (everyoneRole == null)
@@ -80,7 +80,7 @@ namespace VRCLinkingAPI.Model
         /// Gets or Sets GuildRoles
         /// </summary>
         [DataMember(Name = "guildRoles", IsRequired = true, EmitDefaultValue = true)]
-        public List<Role> GuildRoles { get; set; }
+        public List<DiscordRoleDto> GuildRoles { get; set; }
 
         /// <summary>
         /// Gets or Sets GroupRoles

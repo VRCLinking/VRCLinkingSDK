@@ -51,7 +51,7 @@ namespace VRCLinkingAPI.Model
         /// <param name="linkedMembers">linkedMembers (required).</param>
         /// <param name="roles">roles (required).</param>
         /// <param name="autoAssignRoles">autoAssignRoles (required).</param>
-        public Guild(string id = default(string), string name = default(string), string icon = default(string), string owner = default(string), bool guestEnabled = default(bool), bool grpEnabled = default(bool), string grpId = default(string), List<EncodeRole> encRoleList = default(List<EncodeRole>), List<EncodeRole> alwaysEncRoles = default(List<EncodeRole>), int members = default(int), int linkedMembers = default(int), List<Role> roles = default(List<Role>), AutoAssignRoles autoAssignRoles = default(AutoAssignRoles))
+        public Guild(string id = default(string), string name = default(string), string icon = default(string), string owner = default(string), bool guestEnabled = default(bool), bool grpEnabled = default(bool), string grpId = default(string), List<EncodeRole> encRoleList = default(List<EncodeRole>), List<EncodeRole> alwaysEncRoles = default(List<EncodeRole>), int members = default(int), int linkedMembers = default(int), List<DiscordRoleDto> roles = default(List<DiscordRoleDto>), AutoAssignRoles autoAssignRoles = default(AutoAssignRoles))
         {
             // to ensure "id" is required (not null)
             if (id == null)
@@ -173,7 +173,7 @@ namespace VRCLinkingAPI.Model
         /// Gets or Sets Roles
         /// </summary>
         [DataMember(Name = "roles", IsRequired = true, EmitDefaultValue = true)]
-        public List<Role> Roles { get; set; }
+        public List<DiscordRoleDto> Roles { get; set; }
 
         /// <summary>
         /// Gets or Sets AutoAssignRoles

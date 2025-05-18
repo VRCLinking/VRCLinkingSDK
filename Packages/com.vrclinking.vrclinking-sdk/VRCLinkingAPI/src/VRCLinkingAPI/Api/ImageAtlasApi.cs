@@ -15,6 +15,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Mime;
 using VRCLinkingAPI.Client;
+using VRCLinkingAPI.Model;
 
 namespace VRCLinkingAPI.Api
 {
@@ -29,9 +30,30 @@ namespace VRCLinkingAPI.Api
         /// 
         /// </summary>
         /// <exception cref="VRCLinkingAPI.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="guildId"></param>
         /// <param name="worldId"></param>
         /// <returns></returns>
-        void GenerateAtlas(Guid worldId);
+        void GenerateAtlas(string guildId, Guid worldId);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="VRCLinkingAPI.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="guildId"></param>
+        /// <param name="worldId"></param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        ApiResponse<Object> GenerateAtlasWithHttpInfo(string guildId, Guid worldId);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <exception cref="VRCLinkingAPI.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="worldId"></param>
+        /// <param name="atlasIndex"></param>
+        /// <returns></returns>
+        void GetAtlas(Guid worldId, int atlasIndex);
 
         /// <summary>
         /// 
@@ -41,8 +63,27 @@ namespace VRCLinkingAPI.Api
         /// </remarks>
         /// <exception cref="VRCLinkingAPI.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="worldId"></param>
+        /// <param name="atlasIndex"></param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> GenerateAtlasWithHttpInfo(Guid worldId);
+        ApiResponse<Object> GetAtlasWithHttpInfo(Guid worldId, int atlasIndex);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <exception cref="VRCLinkingAPI.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="worldId"></param>
+        /// <returns>GetMetadataResponse</returns>
+        GetMetadataResponse GetMetadata(Guid worldId);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="VRCLinkingAPI.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="worldId"></param>
+        /// <returns>ApiResponse of GetMetadataResponse</returns>
+        ApiResponse<GetMetadataResponse> GetMetadataWithHttpInfo(Guid worldId);
         #endregion Synchronous Operations
     }
 
@@ -59,10 +100,60 @@ namespace VRCLinkingAPI.Api
         /// 
         /// </remarks>
         /// <exception cref="VRCLinkingAPI.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="guildId"></param>
         /// <param name="worldId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task GenerateAtlasAsync(Guid worldId, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        System.Threading.Tasks.Task GenerateAtlasAsync(string guildId, Guid worldId, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="VRCLinkingAPI.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="guildId"></param>
+        /// <param name="worldId"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse</returns>
+        System.Threading.Tasks.Task<ApiResponse<Object>> GenerateAtlasWithHttpInfoAsync(string guildId, Guid worldId, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="VRCLinkingAPI.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="worldId"></param>
+        /// <param name="atlasIndex"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of void</returns>
+        System.Threading.Tasks.Task GetAtlasAsync(Guid worldId, int atlasIndex, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="VRCLinkingAPI.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="worldId"></param>
+        /// <param name="atlasIndex"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse</returns>
+        System.Threading.Tasks.Task<ApiResponse<Object>> GetAtlasWithHttpInfoAsync(Guid worldId, int atlasIndex, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="VRCLinkingAPI.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="worldId"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of GetMetadataResponse</returns>
+        System.Threading.Tasks.Task<GetMetadataResponse> GetMetadataAsync(Guid worldId, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
 
         /// <summary>
         /// 
@@ -73,8 +164,8 @@ namespace VRCLinkingAPI.Api
         /// <exception cref="VRCLinkingAPI.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="worldId"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> GenerateAtlasWithHttpInfoAsync(Guid worldId, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
+        /// <returns>Task of ApiResponse (GetMetadataResponse)</returns>
+        System.Threading.Tasks.Task<ApiResponse<GetMetadataResponse>> GetMetadataWithHttpInfoAsync(Guid worldId, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken));
         #endregion Asynchronous Operations
     }
 
@@ -223,21 +314,27 @@ namespace VRCLinkingAPI.Api
         ///  
         /// </summary>
         /// <exception cref="VRCLinkingAPI.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="guildId"></param>
         /// <param name="worldId"></param>
         /// <returns></returns>
-        public void GenerateAtlas(Guid worldId)
+        public void GenerateAtlas(string guildId, Guid worldId)
         {
-            GenerateAtlasWithHttpInfo(worldId);
+            GenerateAtlasWithHttpInfo(guildId, worldId);
         }
 
         /// <summary>
         ///  
         /// </summary>
         /// <exception cref="VRCLinkingAPI.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="guildId"></param>
         /// <param name="worldId"></param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public VRCLinkingAPI.Client.ApiResponse<Object> GenerateAtlasWithHttpInfo(Guid worldId)
+        public VRCLinkingAPI.Client.ApiResponse<Object> GenerateAtlasWithHttpInfo(string guildId, Guid worldId)
         {
+            // verify the required parameter 'guildId' is set
+            if (guildId == null)
+                throw new VRCLinkingAPI.Client.ApiException(400, "Missing required parameter 'guildId' when calling ImageAtlasApi->GenerateAtlas");
+
             VRCLinkingAPI.Client.RequestOptions localVarRequestOptions = new VRCLinkingAPI.Client.RequestOptions();
 
             string[] _contentTypes = new string[] {
@@ -253,6 +350,7 @@ namespace VRCLinkingAPI.Api
             var localVarAccept = VRCLinkingAPI.Client.ClientUtils.SelectHeaderAccept(_accepts);
             if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
 
+            localVarRequestOptions.PathParameters.Add("guildId", VRCLinkingAPI.Client.ClientUtils.ParameterToString(guildId)); // path parameter
             localVarRequestOptions.PathParameters.Add("worldId", VRCLinkingAPI.Client.ClientUtils.ParameterToString(worldId)); // path parameter
 
             // authentication (Bearer) required
@@ -262,7 +360,84 @@ namespace VRCLinkingAPI.Api
             }
 
             // make the HTTP request
-            var localVarResponse = this.Client.Post<Object>("/world_images/atlas/{worldId}/generate", localVarRequestOptions, this.Configuration);
+            var localVarResponse = this.Client.Post<Object>("/world_images/atlas/{guildId}/{worldId}/generate", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("GenerateAtlas", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="VRCLinkingAPI.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="guildId"></param>
+        /// <param name="worldId"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of void</returns>
+        public async System.Threading.Tasks.Task GenerateAtlasAsync(string guildId, Guid worldId, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        {
+            var task = GenerateAtlasWithHttpInfoAsync(guildId, worldId, cancellationToken);
+#if UNITY_EDITOR || !UNITY_WEBGL
+            await task.ConfigureAwait(false);
+#else
+            await task;
+#endif
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="VRCLinkingAPI.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="guildId"></param>
+        /// <param name="worldId"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse</returns>
+        public async System.Threading.Tasks.Task<VRCLinkingAPI.Client.ApiResponse<Object>> GenerateAtlasWithHttpInfoAsync(string guildId, Guid worldId, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        {
+            // verify the required parameter 'guildId' is set
+            if (guildId == null)
+                throw new VRCLinkingAPI.Client.ApiException(400, "Missing required parameter 'guildId' when calling ImageAtlasApi->GenerateAtlas");
+
+
+            VRCLinkingAPI.Client.RequestOptions localVarRequestOptions = new VRCLinkingAPI.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+            };
+
+
+            var localVarContentType = VRCLinkingAPI.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = VRCLinkingAPI.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("guildId", VRCLinkingAPI.Client.ClientUtils.ParameterToString(guildId)); // path parameter
+            localVarRequestOptions.PathParameters.Add("worldId", VRCLinkingAPI.Client.ClientUtils.ParameterToString(worldId)); // path parameter
+
+            // authentication (Bearer) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", this.Configuration.GetApiKeyWithPrefix("Authorization"));
+            }
+
+            // make the HTTP request
+
+            var task = this.AsynchronousClient.PostAsync<Object>("/world_images/atlas/{guildId}/{worldId}/generate", localVarRequestOptions, this.Configuration, cancellationToken);
+
+#if UNITY_EDITOR || !UNITY_WEBGL
+            var localVarResponse = await task.ConfigureAwait(false);
+#else
+            var localVarResponse = await task;
+#endif
 
             if (this.ExceptionFactory != null)
             {
@@ -278,11 +453,69 @@ namespace VRCLinkingAPI.Api
         /// </summary>
         /// <exception cref="VRCLinkingAPI.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="worldId"></param>
+        /// <param name="atlasIndex"></param>
+        /// <returns></returns>
+        public void GetAtlas(Guid worldId, int atlasIndex)
+        {
+            GetAtlasWithHttpInfo(worldId, atlasIndex);
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="VRCLinkingAPI.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="worldId"></param>
+        /// <param name="atlasIndex"></param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public VRCLinkingAPI.Client.ApiResponse<Object> GetAtlasWithHttpInfo(Guid worldId, int atlasIndex)
+        {
+            VRCLinkingAPI.Client.RequestOptions localVarRequestOptions = new VRCLinkingAPI.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+            };
+
+            var localVarContentType = VRCLinkingAPI.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = VRCLinkingAPI.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("worldId", VRCLinkingAPI.Client.ClientUtils.ParameterToString(worldId)); // path parameter
+            localVarRequestOptions.PathParameters.Add("atlasIndex", VRCLinkingAPI.Client.ClientUtils.ParameterToString(atlasIndex)); // path parameter
+
+            // authentication (Bearer) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", this.Configuration.GetApiKeyWithPrefix("Authorization"));
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Get<Object>("/world_images/atlas/{worldId}/{atlasIndex}", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("GetAtlas", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="VRCLinkingAPI.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="worldId"></param>
+        /// <param name="atlasIndex"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task GenerateAtlasAsync(Guid worldId, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task GetAtlasAsync(Guid worldId, int atlasIndex, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
-            var task = GenerateAtlasWithHttpInfoAsync(worldId, cancellationToken);
+            var task = GetAtlasWithHttpInfoAsync(worldId, atlasIndex, cancellationToken);
 #if UNITY_EDITOR || !UNITY_WEBGL
             await task.ConfigureAwait(false);
 #else
@@ -295,9 +528,10 @@ namespace VRCLinkingAPI.Api
         /// </summary>
         /// <exception cref="VRCLinkingAPI.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="worldId"></param>
+        /// <param name="atlasIndex"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<VRCLinkingAPI.Client.ApiResponse<Object>> GenerateAtlasWithHttpInfoAsync(Guid worldId, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<VRCLinkingAPI.Client.ApiResponse<Object>> GetAtlasWithHttpInfoAsync(Guid worldId, int atlasIndex, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
         {
 
             VRCLinkingAPI.Client.RequestOptions localVarRequestOptions = new VRCLinkingAPI.Client.RequestOptions();
@@ -317,6 +551,7 @@ namespace VRCLinkingAPI.Api
             if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
 
             localVarRequestOptions.PathParameters.Add("worldId", VRCLinkingAPI.Client.ClientUtils.ParameterToString(worldId)); // path parameter
+            localVarRequestOptions.PathParameters.Add("atlasIndex", VRCLinkingAPI.Client.ClientUtils.ParameterToString(atlasIndex)); // path parameter
 
             // authentication (Bearer) required
             if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
@@ -326,7 +561,7 @@ namespace VRCLinkingAPI.Api
 
             // make the HTTP request
 
-            var task = this.AsynchronousClient.PostAsync<Object>("/world_images/atlas/{worldId}/generate", localVarRequestOptions, this.Configuration, cancellationToken);
+            var task = this.AsynchronousClient.GetAsync<Object>("/world_images/atlas/{worldId}/{atlasIndex}", localVarRequestOptions, this.Configuration, cancellationToken);
 
 #if UNITY_EDITOR || !UNITY_WEBGL
             var localVarResponse = await task.ConfigureAwait(false);
@@ -336,7 +571,139 @@ namespace VRCLinkingAPI.Api
 
             if (this.ExceptionFactory != null)
             {
-                Exception _exception = this.ExceptionFactory("GenerateAtlas", localVarResponse);
+                Exception _exception = this.ExceptionFactory("GetAtlas", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="VRCLinkingAPI.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="worldId"></param>
+        /// <returns>GetMetadataResponse</returns>
+        public GetMetadataResponse GetMetadata(Guid worldId)
+        {
+            VRCLinkingAPI.Client.ApiResponse<GetMetadataResponse> localVarResponse = GetMetadataWithHttpInfo(worldId);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="VRCLinkingAPI.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="worldId"></param>
+        /// <returns>ApiResponse of GetMetadataResponse</returns>
+        public VRCLinkingAPI.Client.ApiResponse<GetMetadataResponse> GetMetadataWithHttpInfo(Guid worldId)
+        {
+            VRCLinkingAPI.Client.RequestOptions localVarRequestOptions = new VRCLinkingAPI.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "text/plain",
+                "application/json",
+                "text/json"
+            };
+
+            var localVarContentType = VRCLinkingAPI.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = VRCLinkingAPI.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("worldId", VRCLinkingAPI.Client.ClientUtils.ParameterToString(worldId)); // path parameter
+
+            // authentication (Bearer) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", this.Configuration.GetApiKeyWithPrefix("Authorization"));
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Get<GetMetadataResponse>("/world_images/atlas/{worldId}/metadata", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("GetMetadata", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="VRCLinkingAPI.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="worldId"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of GetMetadataResponse</returns>
+        public async System.Threading.Tasks.Task<GetMetadataResponse> GetMetadataAsync(Guid worldId, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        {
+            var task = GetMetadataWithHttpInfoAsync(worldId, cancellationToken);
+#if UNITY_EDITOR || !UNITY_WEBGL
+            VRCLinkingAPI.Client.ApiResponse<GetMetadataResponse> localVarResponse = await task.ConfigureAwait(false);
+#else
+            VRCLinkingAPI.Client.ApiResponse<GetMetadataResponse> localVarResponse = await task;
+#endif
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <exception cref="VRCLinkingAPI.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="worldId"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (GetMetadataResponse)</returns>
+        public async System.Threading.Tasks.Task<VRCLinkingAPI.Client.ApiResponse<GetMetadataResponse>> GetMetadataWithHttpInfoAsync(Guid worldId, System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+        {
+
+            VRCLinkingAPI.Client.RequestOptions localVarRequestOptions = new VRCLinkingAPI.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "text/plain",
+                "application/json",
+                "text/json"
+            };
+
+
+            var localVarContentType = VRCLinkingAPI.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = VRCLinkingAPI.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("worldId", VRCLinkingAPI.Client.ClientUtils.ParameterToString(worldId)); // path parameter
+
+            // authentication (Bearer) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Authorization")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", this.Configuration.GetApiKeyWithPrefix("Authorization"));
+            }
+
+            // make the HTTP request
+
+            var task = this.AsynchronousClient.GetAsync<GetMetadataResponse>("/world_images/atlas/{worldId}/metadata", localVarRequestOptions, this.Configuration, cancellationToken);
+
+#if UNITY_EDITOR || !UNITY_WEBGL
+            var localVarResponse = await task.ConfigureAwait(false);
+#else
+            var localVarResponse = await task;
+#endif
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("GetMetadata", localVarResponse);
                 if (_exception != null) throw _exception;
             }
 

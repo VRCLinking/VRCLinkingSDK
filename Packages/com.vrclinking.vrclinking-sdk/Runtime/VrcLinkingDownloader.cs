@@ -12,7 +12,7 @@ using Debug = UnityEngine.Debug;
 
 namespace VRCLinking
 {   
-    [RequireComponent(typeof(LzwCompressor))]
+    [RequireComponent(typeof(Compressor))]
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     public partial class VrcLinkingDownloader : UdonSharpBehaviour
     {
@@ -20,7 +20,7 @@ namespace VRCLinking
         public VRCUrl fallbackUrl;
         bool _isLoadingFallback = false;
 
-        public LzwCompressor compressor;
+        public Compressor compressor;
 
         public string serverName;
         public string serverId;
@@ -35,7 +35,7 @@ namespace VRCLinking
 
             if (compressor == null)
             {
-                compressor = GetComponent<LzwCompressor>();
+                compressor = GetComponent<Compressor>();
                 
                 if (compressor == null)
                 {
@@ -54,9 +54,16 @@ namespace VRCLinking
                 return;
             }
 
-            var unicode = Encoding.Unicode.GetBytes(result.Result);
+            if (result.Result.StartsWith("{"))
+            {
+                ParseData(result.Result);
+            }
+            else
+            {
+                var unicode = Encoding.Unicode.GetBytes(result.Result);
 
-            compressor.StartDecompression(unicode, (IUdonEventReceiver)this, nameof(OnDecompressionSuccess));
+                compressor.StartDecompression(unicode, (IUdonEventReceiver)this, nameof(OnDecompressionSuccess));
+            }
         }
 
         public override void OnStringLoadError(IVRCStringDownload result)

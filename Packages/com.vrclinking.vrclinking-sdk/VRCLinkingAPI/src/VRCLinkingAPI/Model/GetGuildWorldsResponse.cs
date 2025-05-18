@@ -40,7 +40,9 @@ namespace VRCLinkingAPI.Model
         /// </summary>
         /// <param name="guild">guild (required).</param>
         /// <param name="worlds">worlds (required).</param>
-        public GetGuildWorldsResponse(LimitedGuild guild = default(LimitedGuild), List<WorldSettingsDto> worlds = default(List<WorldSettingsDto>))
+        /// <param name="groupRoles">groupRoles (required).</param>
+        /// <param name="discordRoles">discordRoles (required).</param>
+        public GetGuildWorldsResponse(LimitedGuild guild = default(LimitedGuild), List<WorldSettingsDto> worlds = default(List<WorldSettingsDto>), List<GroupRole> groupRoles = default(List<GroupRole>), List<DiscordRoleDto> discordRoles = default(List<DiscordRoleDto>))
         {
             // to ensure "guild" is required (not null)
             if (guild == null)
@@ -54,6 +56,18 @@ namespace VRCLinkingAPI.Model
                 throw new ArgumentNullException("worlds is a required property for GetGuildWorldsResponse and cannot be null");
             }
             this.Worlds = worlds;
+            // to ensure "groupRoles" is required (not null)
+            if (groupRoles == null)
+            {
+                throw new ArgumentNullException("groupRoles is a required property for GetGuildWorldsResponse and cannot be null");
+            }
+            this.GroupRoles = groupRoles;
+            // to ensure "discordRoles" is required (not null)
+            if (discordRoles == null)
+            {
+                throw new ArgumentNullException("discordRoles is a required property for GetGuildWorldsResponse and cannot be null");
+            }
+            this.DiscordRoles = discordRoles;
         }
 
         /// <summary>
@@ -69,6 +83,18 @@ namespace VRCLinkingAPI.Model
         public List<WorldSettingsDto> Worlds { get; set; }
 
         /// <summary>
+        /// Gets or Sets GroupRoles
+        /// </summary>
+        [DataMember(Name = "groupRoles", IsRequired = true, EmitDefaultValue = true)]
+        public List<GroupRole> GroupRoles { get; set; }
+
+        /// <summary>
+        /// Gets or Sets DiscordRoles
+        /// </summary>
+        [DataMember(Name = "discordRoles", IsRequired = true, EmitDefaultValue = true)]
+        public List<DiscordRoleDto> DiscordRoles { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -78,6 +104,8 @@ namespace VRCLinkingAPI.Model
             sb.Append("class GetGuildWorldsResponse {\n");
             sb.Append("  Guild: ").Append(Guild).Append("\n");
             sb.Append("  Worlds: ").Append(Worlds).Append("\n");
+            sb.Append("  GroupRoles: ").Append(GroupRoles).Append("\n");
+            sb.Append("  DiscordRoles: ").Append(DiscordRoles).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }

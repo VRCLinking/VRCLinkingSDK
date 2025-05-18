@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using UnityEditor;
 using UnityEngine;
 using VRCLinking.Editor.Models;
+using VRCLinking.Modules.Posters;
 using VRCLinkingAPI.Api;
 using VRCLinkingAPI.Client;
 using VRCLinkingAPI.Model;
@@ -22,6 +23,7 @@ namespace VRCLinking.Editor
         UsersApi _usersApi;
         GuildsApi _guildsApi;
         WorldsApi _worldsApi;
+        UnityPosterApi _unityPosterApi;
         
         public VrcLinkingApiHelper()
         {
@@ -37,6 +39,7 @@ namespace VRCLinking.Editor
             _usersApi = new UsersApi(config);
             _guildsApi = new GuildsApi(config);
             _worldsApi = new WorldsApi(config);
+            _unityPosterApi = new UnityPosterApi(config);
         }
 
         public void SetToken(string token)
@@ -145,6 +148,18 @@ namespace VRCLinking.Editor
             }
             
             return roles;
+        }
+
+        public async Task SyncPosters(string guildId, Guid worldId, List<VrcLinkingPoster> posters)
+        {
+            
+            var request = new SyncPostersRequest(posters.Select(p => new UnityPosterData()
+            {
+                SlotId = p.slotId,
+                SlotName = p.slotName
+            }).ToList());
+            
+            await _unityPosterApi.SyncPostersAsync(guildId, worldId, request);
         }
         
         static Configuration GetConfiguration()

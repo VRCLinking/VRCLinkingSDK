@@ -217,7 +217,7 @@ MonoBehaviour:
       Data: 11|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: VRCLinking.Utilities.LzwCompressor, VRCLinking.Runtime
+      Data: VRCLinking.Utilities.Compressor, VRCLinking.Runtime
     - Name: 
       Entry: 8
       Data: 

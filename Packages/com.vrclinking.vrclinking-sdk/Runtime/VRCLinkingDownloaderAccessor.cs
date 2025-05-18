@@ -153,5 +153,23 @@ namespace VRCLinking
             formattedMembers = sb.ToString();
             return true;
         }
+
+        public bool TryGetAtlasDetail(out DataDictionary atlasMetadata)
+        {
+            atlasMetadata = null;
+            if (!_isDataValid)
+            {
+                return false;
+            }
+
+            if (!parsedData.ContainsKey("AtlasDetail") || parsedData["AtlasDetail"].TokenType != TokenType.DataDictionary)
+            {
+                return false;
+            }
+
+            atlasMetadata = parsedData["AtlasDetail"].DataDictionary;
+
+            return true;
+        }
     }
 }

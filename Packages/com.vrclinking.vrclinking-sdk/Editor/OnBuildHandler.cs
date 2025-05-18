@@ -21,11 +21,11 @@ namespace VRCLinking.Editor
                 return;
             }
 
-            var lzwCompressor = downloader.GetComponent<LzwCompressor>();
+            var lzwCompressor = downloader.GetComponent<Compressor>();
             
             if (lzwCompressor == null)
             {
-                lzwCompressor = downloader.gameObject.AddComponent<LzwCompressor>();
+                lzwCompressor = downloader.gameObject.AddComponent<Compressor>();
             }
             
             downloader.compressor = lzwCompressor;

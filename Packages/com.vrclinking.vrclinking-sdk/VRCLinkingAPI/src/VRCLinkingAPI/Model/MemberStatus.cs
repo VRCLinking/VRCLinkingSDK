@@ -52,7 +52,13 @@ namespace VRCLinkingAPI.Model
         /// Enum Unknown for value: Unknown
         /// </summary>
         [EnumMember(Value = "Unknown")]
-        Unknown = 4
+        Unknown = 4,
+
+        /// <summary>
+        /// Enum MinimumMemberCount for value: MinimumMemberCount
+        /// </summary>
+        [EnumMember(Value = "MinimumMemberCount")]
+        MinimumMemberCount = 5
     }
 
 }

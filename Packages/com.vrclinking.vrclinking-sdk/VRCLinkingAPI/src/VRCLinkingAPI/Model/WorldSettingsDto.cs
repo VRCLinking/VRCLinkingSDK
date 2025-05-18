@@ -49,7 +49,11 @@ namespace VRCLinkingAPI.Model
         /// <param name="enabled">enabled (required).</param>
         /// <param name="includeDiscordData">includeDiscordData (required).</param>
         /// <param name="includeGroupData">includeGroupData (required).</param>
-        public WorldSettingsDto(Guid id = default(Guid), string name = default(string), string requestCount = default(string), string guildId = default(string), string customData = default(string), bool compression = default(bool), bool encryption = default(bool), bool jsonMode = default(bool), bool enabled = default(bool), bool includeDiscordData = default(bool), bool includeGroupData = default(bool))
+        /// <param name="discordEncodeRoles">discordEncodeRoles (required).</param>
+        /// <param name="discordAlwaysEncodeRoles">discordAlwaysEncodeRoles (required).</param>
+        /// <param name="groupEncodeRoles">groupEncodeRoles (required).</param>
+        /// <param name="groupAlwaysEncodeRoles">groupAlwaysEncodeRoles (required).</param>
+        public WorldSettingsDto(Guid id = default(Guid), string name = default(string), string requestCount = default(string), string guildId = default(string), string customData = default(string), bool compression = default(bool), bool encryption = default(bool), bool jsonMode = default(bool), bool enabled = default(bool), bool includeDiscordData = default(bool), bool includeGroupData = default(bool), List<DiscordEncodeRoleDto> discordEncodeRoles = default(List<DiscordEncodeRoleDto>), List<DiscordEncodeRoleDto> discordAlwaysEncodeRoles = default(List<DiscordEncodeRoleDto>), List<GroupEncodeRoleDto> groupEncodeRoles = default(List<GroupEncodeRoleDto>), List<GroupEncodeRoleDto> groupAlwaysEncodeRoles = default(List<GroupEncodeRoleDto>))
         {
             this.Id = id;
             // to ensure "name" is required (not null)
@@ -76,6 +80,30 @@ namespace VRCLinkingAPI.Model
             this.Enabled = enabled;
             this.IncludeDiscordData = includeDiscordData;
             this.IncludeGroupData = includeGroupData;
+            // to ensure "discordEncodeRoles" is required (not null)
+            if (discordEncodeRoles == null)
+            {
+                throw new ArgumentNullException("discordEncodeRoles is a required property for WorldSettingsDto and cannot be null");
+            }
+            this.DiscordEncodeRoles = discordEncodeRoles;
+            // to ensure "discordAlwaysEncodeRoles" is required (not null)
+            if (discordAlwaysEncodeRoles == null)
+            {
+                throw new ArgumentNullException("discordAlwaysEncodeRoles is a required property for WorldSettingsDto and cannot be null");
+            }
+            this.DiscordAlwaysEncodeRoles = discordAlwaysEncodeRoles;
+            // to ensure "groupEncodeRoles" is required (not null)
+            if (groupEncodeRoles == null)
+            {
+                throw new ArgumentNullException("groupEncodeRoles is a required property for WorldSettingsDto and cannot be null");
+            }
+            this.GroupEncodeRoles = groupEncodeRoles;
+            // to ensure "groupAlwaysEncodeRoles" is required (not null)
+            if (groupAlwaysEncodeRoles == null)
+            {
+                throw new ArgumentNullException("groupAlwaysEncodeRoles is a required property for WorldSettingsDto and cannot be null");
+            }
+            this.GroupAlwaysEncodeRoles = groupAlwaysEncodeRoles;
             this.CustomData = customData;
         }
 
@@ -146,6 +174,30 @@ namespace VRCLinkingAPI.Model
         public bool IncludeGroupData { get; set; }
 
         /// <summary>
+        /// Gets or Sets DiscordEncodeRoles
+        /// </summary>
+        [DataMember(Name = "discordEncodeRoles", IsRequired = true, EmitDefaultValue = true)]
+        public List<DiscordEncodeRoleDto> DiscordEncodeRoles { get; set; }
+
+        /// <summary>
+        /// Gets or Sets DiscordAlwaysEncodeRoles
+        /// </summary>
+        [DataMember(Name = "discordAlwaysEncodeRoles", IsRequired = true, EmitDefaultValue = true)]
+        public List<DiscordEncodeRoleDto> DiscordAlwaysEncodeRoles { get; set; }
+
+        /// <summary>
+        /// Gets or Sets GroupEncodeRoles
+        /// </summary>
+        [DataMember(Name = "groupEncodeRoles", IsRequired = true, EmitDefaultValue = true)]
+        public List<GroupEncodeRoleDto> GroupEncodeRoles { get; set; }
+
+        /// <summary>
+        /// Gets or Sets GroupAlwaysEncodeRoles
+        /// </summary>
+        [DataMember(Name = "groupAlwaysEncodeRoles", IsRequired = true, EmitDefaultValue = true)]
+        public List<GroupEncodeRoleDto> GroupAlwaysEncodeRoles { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -164,6 +216,10 @@ namespace VRCLinkingAPI.Model
             sb.Append("  Enabled: ").Append(Enabled).Append("\n");
             sb.Append("  IncludeDiscordData: ").Append(IncludeDiscordData).Append("\n");
             sb.Append("  IncludeGroupData: ").Append(IncludeGroupData).Append("\n");
+            sb.Append("  DiscordEncodeRoles: ").Append(DiscordEncodeRoles).Append("\n");
+            sb.Append("  DiscordAlwaysEncodeRoles: ").Append(DiscordAlwaysEncodeRoles).Append("\n");
+            sb.Append("  GroupEncodeRoles: ").Append(GroupEncodeRoles).Append("\n");
+            sb.Append("  GroupAlwaysEncodeRoles: ").Append(GroupAlwaysEncodeRoles).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }

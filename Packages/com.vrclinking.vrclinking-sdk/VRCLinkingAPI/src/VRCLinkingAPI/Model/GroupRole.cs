@@ -40,8 +40,8 @@ namespace VRCLinkingAPI.Model
         /// </summary>
         /// <param name="id">id (required).</param>
         /// <param name="name">name (required).</param>
-        /// <param name="order">order.</param>
-        public GroupRole(string id = default(string), string name = default(string), string order = default(string))
+        /// <param name="order">order (required).</param>
+        public GroupRole(string id = default(string), string name = default(string), int order = default(int))
         {
             // to ensure "id" is required (not null)
             if (id == null)
@@ -73,8 +73,8 @@ namespace VRCLinkingAPI.Model
         /// <summary>
         /// Gets or Sets Order
         /// </summary>
-        [DataMember(Name = "order", EmitDefaultValue = true)]
-        public string Order { get; set; }
+        [DataMember(Name = "order", IsRequired = true, EmitDefaultValue = true)]
+        public int Order { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
