@@ -18,7 +18,10 @@ namespace VRCLinking.Modules.Posters
         private protected override string ModuleName => "VrcLinkingPostersModule";
 
         public int maxAtlasCount = 25;
+        [Header("Material Settings")]
         public Material posterMaterial;
+        public int posterMaterialIndex = 0;
+        
         public bool disablePostersOnBuild = true;
 
         [HideInInspector] public VRCUrl[] atlasUrlsVariation0;
@@ -177,7 +180,13 @@ namespace VRCLinking.Modules.Posters
                         SetRendererSize(meshRenderer, targetWidth, targetHeight, width, height);
                     }
 
-                    meshRenderer.material = newMaterial;
+                    if (meshRenderer.materials.Length <= posterMaterialIndex)
+                    {
+                        LogError($"MeshRenderer {meshRenderer.name} does not have enough materials");
+                        return;
+                    }
+                    
+                    meshRenderer.materials[posterMaterialIndex] = newMaterial;
                     _materialPropertyBlock.SetVector("_SurfaceDimensions", new Vector2(
                         GetLength(width, meshRenderer.gameObject),
                         GetLength(height, meshRenderer.gameObject)
