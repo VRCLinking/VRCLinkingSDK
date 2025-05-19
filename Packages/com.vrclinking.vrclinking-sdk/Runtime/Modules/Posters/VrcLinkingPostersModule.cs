@@ -162,9 +162,13 @@ namespace VRCLinking.Modules.Posters
 
                 var slotIndex = FindIndexBySlotId(slotId);
                 var meshRenderer = FindMeshRendererBySlotId(slotId);
-
+                
+                Debug.Log($"SlotId: {slotId} - Index: {slotIndex} - OffsetX: {offsetX} - OffsetY: {offsetY} - Width: {targetWidth} - Height: {targetHeight}");
+                
                 if (meshRenderer)
                 {
+                    Debug.Log(posterSlotsWidth.Length);
+                    Debug.Log(posterSlotsHeight.Length);
                     var width = posterSlotsWidth[slotIndex];
                     var height = posterSlotsHeight[slotIndex];
 

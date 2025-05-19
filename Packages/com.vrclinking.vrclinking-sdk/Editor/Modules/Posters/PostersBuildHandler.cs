@@ -25,15 +25,6 @@ namespace VRCLinking.Editor.Modules.Posters
             }
 
             var posters = Object.FindObjectsOfType<VrcLinkingPoster>(true);
-            foreach (var poster in posters)
-            {
-                if (module.disablePostersOnBuild)
-                {
-                    poster.gameObject.SetActive(false);
-                }
-
-                Object.DestroyImmediate(poster);
-            }
 
             var atlasCount = module.maxAtlasCount;
             // Create new VRCUrl array "BaseUrl/world_id/index"
@@ -51,16 +42,29 @@ namespace VRCLinking.Editor.Modules.Posters
                 .Select(x => new Material(module.posterMaterial))
                 .ToArray();
 
-            module.posterSlotIds = posters.Select(x => x.slotId).ToArray();
-            var meshRenderers = posters.Select(x => x.transform.GetComponentInChildren<MeshRenderer>());
+            var allPosters = posters;
+
+            module.posterSlotIds = allPosters.Select(x => x.slotId).ToArray();
+            var meshRenderers = allPosters.Select(x => x.transform.GetComponentInChildren<MeshRenderer>());
             var renderers = meshRenderers.ToList();
 
             module.posterSlotsRenderers = renderers.ToArray();
             module.posterSlotsImages =
-                posters.Select(x => x.transform.GetComponentInChildren<RawImage>()).ToArray();
-            module.posterAutoSize = posters.Select(x => x.enableAutoSize).ToArray();
-            module.posterSlotsWidth = posters.Select(x => x.widthSizeControl).ToArray();
-            module.posterSlotsHeight = posters.Select(x => x.heightSizeControl).ToArray();
+                allPosters.Select(x => x.transform.GetComponentInChildren<RawImage>()).ToArray();
+            module.posterAutoSize = allPosters.Select(x => x.enableAutoSize).ToArray();
+            module.posterSlotsWidth = allPosters.Select(x => x.widthSizeControl).ToArray();
+            module.posterSlotsHeight = allPosters.Select(x => x.heightSizeControl).ToArray();
+            
+            
+            foreach (var poster in posters)
+            {
+                if (module.disablePostersOnBuild)
+                {
+                    poster.gameObject.SetActive(false);
+                }
+
+                Object.DestroyImmediate(poster);
+            }
         }
     }
 }
