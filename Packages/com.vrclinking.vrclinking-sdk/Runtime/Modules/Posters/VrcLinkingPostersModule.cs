@@ -20,7 +20,7 @@ namespace VRCLinking.Modules.Posters
         public int maxAtlasCount = 25;
         [Header("Material Settings")]
         public Material posterMaterial;
-        public int posterMaterialIndex = 0;
+        //public int posterMaterialIndex = 0;
         
         public bool disablePostersOnBuild = true;
 
@@ -153,7 +153,7 @@ namespace VRCLinking.Modules.Posters
         {
             var newMaterial = atlasMaterials[_loadedAtlasCount];
 
-            SetMaterialData(newMaterial, texture);
+            newMaterial.mainTexture = texture;
             for (int i = 0; i < atlasMetadata.Count; i++)
             {
                 var metadata = atlasMetadata[i].DataDictionary;
@@ -180,13 +180,13 @@ namespace VRCLinking.Modules.Posters
                         SetRendererSize(meshRenderer, targetWidth, targetHeight, width, height);
                     }
 
-                    if (meshRenderer.materials.Length <= posterMaterialIndex)
-                    {
-                        LogError($"MeshRenderer {meshRenderer.name} does not have enough materials");
-                        return;
-                    }
+                    // if (meshRenderer.materials.Length <= posterMaterialIndex)
+                    // {
+                    //     LogError($"MeshRenderer {meshRenderer.name} does not have enough materials");
+                    //     return;
+                    // }
                     
-                    meshRenderer.materials[posterMaterialIndex] = newMaterial;
+                    meshRenderer.material = newMaterial;
                     _materialPropertyBlock.SetVector("_SurfaceDimensions", new Vector2(
                         GetLength(width, meshRenderer.gameObject),
                         GetLength(height, meshRenderer.gameObject)
