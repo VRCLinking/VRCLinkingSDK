@@ -10,7 +10,7 @@ namespace VRCLinking.Modules
         /// <summary>
         /// The name of the module.
         /// </summary>
-        private protected virtual string ModuleName => "VrcLinkingModuleBase";
+        public virtual string ModuleName => "VrcLinkingModuleBase";
         
         /// <summary>
         /// Called when the data is loaded.

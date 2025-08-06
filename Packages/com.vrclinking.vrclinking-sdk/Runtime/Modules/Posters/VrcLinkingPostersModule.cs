@@ -15,7 +15,7 @@ namespace VRCLinking.Modules.Posters
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     public class VrcLinkingPostersModule : VrcLinkingModuleBase
     {
-        private protected override string ModuleName => "VrcLinkingPostersModule";
+        public override string ModuleName => "VrcLinkingPostersModule";
 
         public int maxAtlasCount = 25;
         [Header("Material Settings")]

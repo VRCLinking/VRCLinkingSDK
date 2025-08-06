@@ -24,7 +24,7 @@ namespace VRCLinking.Modules.SupporterBoard
         [SerializeField] internal RectTransform maskRect;
         [SerializeField] internal RectTransform contentRect;
 
-        private protected override string ModuleName => "VrcLinkingSupporterModule";
+        public override string ModuleName => "VrcLinkingSupporterModule";
 
 
         public override void OnDataLoaded()

@@ -9,7 +9,7 @@ namespace VRCLinking.Modules.Toggles
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     public class VrcLinkingToggleModule : VrcLinkingModuleBase
     {
-        private protected override string ModuleName => "VrcLinkingToggleModule";
+        public override string ModuleName => "VrcLinkingToggleModule";
 
         public DataDictionary toggleData;
         /*

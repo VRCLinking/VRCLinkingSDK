@@ -9,7 +9,7 @@ using VRCLinking.Modules;
 
 public class VrcLinkingGraphModule : VrcLinkingModuleBase
 {
-    private protected override string ModuleName => "VrcLinkingGraphModule";
+    public override string ModuleName => "VrcLinkingGraphModule";
     [NonSerialized] public DataDictionary downloadedData;
     [NonSerialized] public DataDictionary guildUsers;
 
