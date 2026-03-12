@@ -11,6 +11,7 @@ namespace VRCLinking.Modules.SupporterBoard
 {
     [RequireComponent(typeof(VrcLinkingSupporterModuleHelper))]
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
+    [ExecuteInEditMode]
     public class VrcLinkingSupporterModule : VrcLinkingModuleBase
     {
         public TextMeshProUGUI supporterBoardText;
@@ -25,6 +26,40 @@ namespace VRCLinking.Modules.SupporterBoard
         [SerializeField] internal RectTransform contentRect;
 
         public override string ModuleName => "VrcLinkingSupporterModule";
+        
+#if UNITY_EDITOR && !COMPILER_UDONSHARP
+        private void OnValidate()
+        {
+            EnsureHelperExists();
+        }
+
+        private void Reset()
+        {
+            EnsureHelperExists();
+        }
+
+        private void EnsureHelperExists()
+        {
+            var helper = GetComponent<VrcLinkingSupporterModuleHelper>();
+            if (helper == null)
+            {
+                helper = gameObject.AddComponent<VrcLinkingSupporterModuleHelper>();
+            }
+
+        }
+
+        private void OnDestroy()
+        {
+            if (Application.isPlaying)
+                return;
+
+            var helper = GetComponent<VrcLinkingSupporterModuleHelper>();
+            if (helper != null)
+            {
+                DestroyImmediate(helper);
+            }
+        }
+#endif
 
 
         public override void OnDataLoaded()
@@ -164,5 +199,7 @@ namespace VRCLinking.Modules.SupporterBoard
 
             SendCustomEventDelayedFrames(nameof(_CustomUpdate), 1);
         }
+        
+        
     }
 }
