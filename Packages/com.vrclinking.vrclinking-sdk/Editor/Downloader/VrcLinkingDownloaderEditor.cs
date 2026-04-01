@@ -89,6 +89,8 @@ namespace VRCLinking.Editor
                 _script.worldName);
 
             _selectedWorldField.BindApi(_apiHelper);
+            _selectedWorldField.OnReloadTimerChanged += ApplyReloadTimer;
+            _selectedWorldField.SetReloadTimer(_script.reloadTimer);
 
             PreviewSelectedWorldField(ServerWorldData.FillFromScript(_script));
             
@@ -127,6 +129,16 @@ namespace VRCLinking.Editor
         private void OnLogout()
         {
             _serverWorldSelection.SetEnabled(false);
+        }
+
+        private void ApplyReloadTimer(float reloadTimer)
+        {
+            Undo.RecordObject(_script, "Updated Reload Timer");
+
+            _script.reloadTimer = reloadTimer;
+
+            EditorUtility.SetDirty(_script);
+            PrefabUtility.RecordPrefabInstancePropertyModifications(_script);
         }
 
         /// <summary>

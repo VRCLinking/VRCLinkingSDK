@@ -43,6 +43,7 @@ namespace VRCLinking.Modules.Posters
         int _atlasCount;
         int _loadedAtlasCount;
         MaterialPropertyBlock _materialPropertyBlock;
+        bool _hasAlreadyLoaded;
 
         void Start()
         {
@@ -52,10 +53,16 @@ namespace VRCLinking.Modules.Posters
 
         public override void OnDataLoaded()
         {
+            if (_hasAlreadyLoaded)
+            {
+                return;
+            }
+            
             if (downloader.TryGetAtlasDetail(out var detail))
             {
                 _atlasDetails = detail;
                 LoadAtlasDetails();
+                _hasAlreadyLoaded = true;
             }
             else
             {

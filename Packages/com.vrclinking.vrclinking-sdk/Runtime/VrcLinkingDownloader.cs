@@ -26,6 +26,7 @@ namespace VRCLinking
         public string serverId;
         public string worldName;
         public Guid worldId;
+        public float reloadTimer = 0f;
 
 
         void Start()
@@ -43,6 +44,11 @@ namespace VRCLinking
                     return;
                 }
             }
+        }
+
+        public void ReloadData()
+        {
+            VRCStringDownloader.LoadUrl(mainUrl, (IUdonEventReceiver)this);
         }
 
 
@@ -63,6 +69,11 @@ namespace VRCLinking
                 var unicode = Encoding.Unicode.GetBytes(result.Result);
 
                 compressor.StartDecompression(unicode, (IUdonEventReceiver)this, nameof(OnDecompressionSuccess));
+            }
+
+            if (reloadTimer > 0f)
+            { 
+                SendCustomEventDelayedSeconds(nameof(ReloadData), Mathf.Max(60f, reloadTimer));
             }
         }
 
