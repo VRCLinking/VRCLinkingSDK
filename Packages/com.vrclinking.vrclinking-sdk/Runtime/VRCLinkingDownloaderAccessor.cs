@@ -221,15 +221,14 @@ namespace VRCLinking
 
             var groupRoleMap = parsedData["GroupRoleMap"].DataDictionary;
 
-            if (!groupRoleMap.ContainsKey(roleId) || !parsedData.ContainsKey("GroupUsers") || parsedData["GroupUsers"].TokenType != TokenType.DataDictionary)
+            if (!groupRoleMap.ContainsKey(roleId))
             {
                 return false;
             }
 
             var roleName = groupRoleMap[roleId].String;
 
-            var tryGetGroupMembersByRoleName = TryGetGroupMembersByRoleName(roleName, out members);
-            return tryGetGroupMembersByRoleName;
+            return TryGetGroupMembersByRoleName(roleName, out members);
         }
 
         public bool TryGetGroupMembersByRoleId(string roleId, out string[] members)
@@ -247,15 +246,14 @@ namespace VRCLinking
 
             var groupRoleMap = parsedData["GroupRoleMap"].DataDictionary;
 
-            if (!groupRoleMap.ContainsKey(roleId) || !parsedData.ContainsKey("GroupUsers") || parsedData["GroupUsers"].TokenType != TokenType.DataDictionary)
+            if (!groupRoleMap.ContainsKey(roleId))
             {
                 return false;
             }
 
             var roleName = groupRoleMap[roleId].String;
 
-            var tryGetGroupMembersByRoleName = TryGetGroupMembersByRoleName(roleName, out members);
-            return tryGetGroupMembersByRoleName;
+            return TryGetGroupMembersByRoleName(roleName, out members);
         }
 
         public bool TryGetFormattedGroupMembersByRoleName(string roleName, out string formattedMembers, string separator = ", ")
