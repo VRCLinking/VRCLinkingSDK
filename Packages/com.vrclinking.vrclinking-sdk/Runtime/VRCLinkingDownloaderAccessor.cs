@@ -154,6 +154,154 @@ namespace VRCLinking
             return true;
         }
 
+        public bool TryGetGroupMembersByRoleName(string roleName, out DataList members)
+        {
+            members = new DataList();
+            if (!_isDataValid)
+            {
+                return false;
+            }
+
+            if (!parsedData.ContainsKey("GroupUsers") || parsedData["GroupUsers"].TokenType != TokenType.DataDictionary)
+            {
+                return false;
+            }
+
+            var groupUsers = parsedData["GroupUsers"].DataDictionary;
+            if (!groupUsers.ContainsKey(roleName) || groupUsers[roleName].TokenType != TokenType.DataList)
+            {
+                return false;
+            }
+
+            members = groupUsers[roleName].DataList;
+
+            return true;
+        }
+
+        public bool TryGetGroupMembersByRoleName(string roleName, out string[] members)
+        {
+            members = new string[0];
+            if (!_isDataValid)
+            {
+                return false;
+            }
+
+            if (!parsedData.ContainsKey("GroupUsers") || parsedData["GroupUsers"].TokenType != TokenType.DataDictionary)
+            {
+                return false;
+            }
+
+            var groupUsers = parsedData["GroupUsers"].DataDictionary;
+            if (!groupUsers.ContainsKey(roleName) || groupUsers[roleName].TokenType != TokenType.DataList)
+            {
+                return false;
+            }
+
+            members = new string[groupUsers[roleName].DataList.Count];
+            for (var i = 0; i < groupUsers[roleName].DataList.Count; i++)
+            {
+                members[i] = groupUsers[roleName].DataList[i].String;
+            }
+
+            return true;
+        }
+
+        public bool TryGetGroupMembersByRoleId(string roleId, out DataList members)
+        {
+            members = new DataList();
+            if (!_isDataValid)
+            {
+                return false;
+            }
+
+            if (!parsedData.ContainsKey("GroupRoleMap") || parsedData["GroupRoleMap"].TokenType != TokenType.DataDictionary)
+            {
+                return false;
+            }
+
+            var groupRoleMap = parsedData["GroupRoleMap"].DataDictionary;
+
+            if (!groupRoleMap.ContainsKey(roleId) || !parsedData.ContainsKey("GroupUsers") || parsedData["GroupUsers"].TokenType != TokenType.DataDictionary)
+            {
+                return false;
+            }
+
+            var roleName = groupRoleMap[roleId].String;
+
+            var tryGetGroupMembersByRoleName = TryGetGroupMembersByRoleName(roleName, out members);
+            return tryGetGroupMembersByRoleName;
+        }
+
+        public bool TryGetGroupMembersByRoleId(string roleId, out string[] members)
+        {
+            members = new string[0];
+            if (!_isDataValid)
+            {
+                return false;
+            }
+
+            if (!parsedData.ContainsKey("GroupRoleMap") || parsedData["GroupRoleMap"].TokenType != TokenType.DataDictionary)
+            {
+                return false;
+            }
+
+            var groupRoleMap = parsedData["GroupRoleMap"].DataDictionary;
+
+            if (!groupRoleMap.ContainsKey(roleId) || !parsedData.ContainsKey("GroupUsers") || parsedData["GroupUsers"].TokenType != TokenType.DataDictionary)
+            {
+                return false;
+            }
+
+            var roleName = groupRoleMap[roleId].String;
+
+            var tryGetGroupMembersByRoleName = TryGetGroupMembersByRoleName(roleName, out members);
+            return tryGetGroupMembersByRoleName;
+        }
+
+        public bool TryGetFormattedGroupMembersByRoleName(string roleName, out string formattedMembers, string separator = ", ")
+        {
+            formattedMembers = string.Empty;
+            if (!TryGetGroupMembersByRoleName(roleName, out DataList members))
+            {
+                return false;
+            }
+
+            StringBuilder sb = new StringBuilder();
+            for (var i = 0; i < members.Count; i++)
+            {
+                sb.Append(members[i].String);
+                if (i < members.Count - 1)
+                {
+                    sb.Append(separator);
+                }
+            }
+
+            formattedMembers = sb.ToString();
+            return true;
+        }
+
+        public bool TryGetFormattedGroupMembersByRoleId(string roleId, out string formattedMembers, string separator = ", ")
+        {
+            formattedMembers = string.Empty;
+            if (!TryGetGroupMembersByRoleId(roleId, out DataList members))
+            {
+                return false;
+            }
+
+            StringBuilder sb = new StringBuilder();
+            for (var i = 0; i < members.Count; i++)
+            {
+                sb.Append(members[i].String);
+                if (i < members.Count - 1)
+                {
+                    sb.Append(separator);
+                }
+            }
+
+            formattedMembers = sb.ToString();
+            return true;
+        }
+
         public bool TryGetAtlasDetail(out DataDictionary atlasMetadata)
         {
             atlasMetadata = null;
