@@ -118,17 +118,7 @@ namespace VRCLinking
                 return false;
             }
 
-            StringBuilder sb = new StringBuilder();
-            for (var i = 0; i < members.Count; i++)
-            {
-                sb.Append(members[i].String);
-                if (i < members.Count - 1)
-                {
-                    sb.Append(separator);
-                }
-            }
-            
-            formattedMembers = sb.ToString();
+            formattedMembers = FormatMembers(members, separator);
             return true;
         }
         
@@ -140,17 +130,7 @@ namespace VRCLinking
                 return false;
             }
 
-            StringBuilder sb = new StringBuilder();
-            for (var i = 0; i < members.Count; i++)
-            {
-                sb.Append(members[i].String);
-                if (i < members.Count - 1)
-                {
-                    sb.Append(separator);
-                }
-            }
-            
-            formattedMembers = sb.ToString();
+            formattedMembers = FormatMembers(members, separator);
             return true;
         }
 
@@ -197,10 +177,11 @@ namespace VRCLinking
                 return false;
             }
 
-            members = new string[groupUsers[roleName].DataList.Count];
-            for (var i = 0; i < groupUsers[roleName].DataList.Count; i++)
+            var memberList = groupUsers[roleName].DataList;
+            members = new string[memberList.Count];
+            for (var i = 0; i < memberList.Count; i++)
             {
-                members[i] = groupUsers[roleName].DataList[i].String;
+                members[i] = memberList[i].String;
             }
 
             return true;
@@ -264,17 +245,7 @@ namespace VRCLinking
                 return false;
             }
 
-            StringBuilder sb = new StringBuilder();
-            for (var i = 0; i < members.Count; i++)
-            {
-                sb.Append(members[i].String);
-                if (i < members.Count - 1)
-                {
-                    sb.Append(separator);
-                }
-            }
-
-            formattedMembers = sb.ToString();
+            formattedMembers = FormatMembers(members, separator);
             return true;
         }
 
@@ -286,6 +257,12 @@ namespace VRCLinking
                 return false;
             }
 
+            formattedMembers = FormatMembers(members, separator);
+            return true;
+        }
+
+        string FormatMembers(DataList members, string separator)
+        {
             StringBuilder sb = new StringBuilder();
             for (var i = 0; i < members.Count; i++)
             {
@@ -296,8 +273,7 @@ namespace VRCLinking
                 }
             }
 
-            formattedMembers = sb.ToString();
-            return true;
+            return sb.ToString();
         }
 
         public bool TryGetAtlasDetail(out DataDictionary atlasMetadata)
