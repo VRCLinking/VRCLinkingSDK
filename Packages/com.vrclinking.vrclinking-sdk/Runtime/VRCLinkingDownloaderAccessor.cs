@@ -261,7 +261,7 @@ namespace VRCLinking
             return true;
         }
 
-        string FormatMembers(DataList members, string separator)
+        private string FormatMembers(DataList members, string separator)
         {
             StringBuilder sb = new StringBuilder();
             for (var i = 0; i < members.Count; i++)
