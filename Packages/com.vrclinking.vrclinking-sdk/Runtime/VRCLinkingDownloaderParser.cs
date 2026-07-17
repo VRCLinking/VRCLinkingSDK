@@ -47,6 +47,26 @@ namespace VRCLinking
                     return;
                 }
             }
+
+            if (parsedData.ContainsKey("AgeVerifiedUsers"))
+            {
+                if (parsedData["AgeVerifiedUsers"].TokenType != TokenType.DataList)
+                {
+                    _isDataValid = false;
+                    LogError("Invalid AgeVerifiedUsers data: expected a list.");
+                    return;
+                }
+
+                var ageVerifiedUsers = parsedData["AgeVerifiedUsers"].DataList;
+                for (var i = 0; i < ageVerifiedUsers.Count; i++)
+                {
+                    if (ageVerifiedUsers[i].TokenType == TokenType.String) continue;
+
+                    _isDataValid = false;
+                    LogError("Invalid AgeVerifiedUsers data: every entry must be a string.");
+                    return;
+                }
+            }
             
             _isDataValid = true;
             

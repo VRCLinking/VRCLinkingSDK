@@ -261,6 +261,48 @@ namespace VRCLinking
             return true;
         }
 
+        public bool TryGetAgeVerifiedUsers(out DataList users)
+        {
+            users = new DataList();
+            if (!_isDataValid || !parsedData.ContainsKey("AgeVerifiedUsers") ||
+                parsedData["AgeVerifiedUsers"].TokenType != TokenType.DataList)
+            {
+                return false;
+            }
+
+            users = parsedData["AgeVerifiedUsers"].DataList;
+            return true;
+        }
+
+        public bool TryGetAgeVerifiedUsers(out string[] users)
+        {
+            users = new string[0];
+            if (!TryGetAgeVerifiedUsers(out DataList userList))
+            {
+                return false;
+            }
+
+            users = new string[userList.Count];
+            for (var i = 0; i < userList.Count; i++)
+            {
+                users[i] = userList[i].String;
+            }
+
+            return true;
+        }
+
+        public bool TryGetFormattedAgeVerifiedUsers(out string formattedUsers, string separator = ", ")
+        {
+            formattedUsers = string.Empty;
+            if (!TryGetAgeVerifiedUsers(out DataList users))
+            {
+                return false;
+            }
+
+            formattedUsers = FormatMembers(users, separator);
+            return true;
+        }
+
         private string FormatMembers(DataList members, string separator)
         {
             StringBuilder sb = new StringBuilder();
