@@ -1,0 +1,56 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <ui:VisualElement name="Root" class="tracking-root">
+        <ui:VisualElement name="Header" class="tracking-header">
+            <ui:VisualElement class="tracking-header-title-row">
+                <ui:VisualElement class="tracking-logo" />
+                <ui:Label text="Area Tracking" class="tracking-title" />
+            </ui:VisualElement>
+            <ui:Label name="WorldStatus" class="tracking-world-status" />
+            <ui:VisualElement class="tracking-status-row">
+                <ui:Label name="SyncStatus" class="tracking-status" />
+                <ui:Button name="ErrorCount" text="0 blockers" class="tracking-error-count" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <uie:Toolbar class="tracking-tabs">
+            <uie:ToolbarToggle name="SetupTab" text="Setup" value="true" />
+            <uie:ToolbarToggle name="AreasTab" text="Areas" />
+            <uie:ToolbarToggle name="ValidationTab" text="Validation" />
+        </uie:Toolbar>
+
+        <ui:VisualElement name="SetupPanel" class="tracking-panel">
+            <ui:Label text="Runtime Settings" class="tracking-section-title" />
+            <ui:Toggle name="TrackingEnabled" label="Tracking Enabled" />
+            <ui:Slider name="HeartbeatInterval" label="Heartbeat Interval" low-value="30" high-value="120" show-input-field="true" />
+            <ui:Label text="Seconds between periodic telemetry requests." class="tracking-hint" />
+            <ui:Slider name="StartupDelay" label="Startup Delay" low-value="5" high-value="120" show-input-field="true" />
+            <ui:Label text="Delay before the first request, allowing other world startup work to finish." class="tracking-hint" />
+            <ui:HelpBox text="Players outside every included box are recorded as Outside automatically." message-type="Info" />
+
+            <ui:VisualElement class="tracking-section-divider" />
+            <ui:Label text="Server Configuration" class="tracking-section-title" />
+            <ui:Label name="ServerComparison" text="Server status has not been checked." class="tracking-hint" />
+            <ui:VisualElement class="tracking-action-row">
+                <ui:Button name="RefreshServer" text="Refresh Status" />
+                <ui:Button name="SyncAreas" text="Sync Areas" class="primary-action" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <ui:VisualElement name="AreasPanel" class="tracking-panel tracking-hidden">
+            <ui:VisualElement class="tracking-panel-heading-row">
+                <ui:VisualElement>
+                    <ui:Label text="Discovered Areas" class="tracking-section-title" />
+                    <ui:Label name="AreaSummary" class="tracking-hint" />
+                </ui:VisualElement>
+                <ui:Button name="AddArea" text="+ Add Area" class="primary-action" />
+            </ui:VisualElement>
+            <ui:ScrollView name="AreaList" class="tracking-list" />
+        </ui:VisualElement>
+
+        <ui:VisualElement name="ValidationPanel" class="tracking-panel tracking-hidden">
+            <ui:Label text="Validation" class="tracking-section-title" />
+            <ui:Label name="ValidationSummary" class="tracking-hint" />
+            <ui:ScrollView name="ValidationList" class="tracking-list" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

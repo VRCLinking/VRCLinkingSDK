@@ -4,6 +4,8 @@
     "references": [
         "VRCLinking.Runtime",
         "UdonSharp.Runtime",
+        "UdonSharp.Editor",
+        "VRC.Udon",
         "Unity.TextMeshPro",
         "VRCLinkingAPI"
     ],

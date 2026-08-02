@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using UnityEditor;
 using UnityEngine;
 using VRCLinking.Editor.Models;
+using VRCLinking.Editor.Modules.AreaTracking;
 using VRCLinking.Modules.Posters;
 using VRCLinkingAPI.Api;
 using VRCLinkingAPI.Client;
@@ -24,6 +25,7 @@ namespace VRCLinking.Editor
         GuildsApi _guildsApi;
         WorldsApi _worldsApi;
         UnityPosterApi _unityPosterApi;
+        VrcLinkingWorldTrackingApi _worldTrackingApi;
         
         public VrcLinkingApiHelper()
         {
@@ -40,6 +42,7 @@ namespace VRCLinking.Editor
             _guildsApi = new GuildsApi(config);
             _worldsApi = new WorldsApi(config);
             _unityPosterApi = new UnityPosterApi(config);
+            _worldTrackingApi = new VrcLinkingWorldTrackingApi(config);
         }
 
         public void SetToken(string token)
@@ -93,7 +96,7 @@ namespace VRCLinking.Editor
                 
                 return true;
             }
-            catch (ApiException e)
+            catch (ApiException)
             {
                 return false;
             }
@@ -161,11 +164,23 @@ namespace VRCLinking.Editor
             
             await _unityPosterApi.SyncPostersAsync(guildId, worldId, request);
         }
+
+        internal Task<WorldTrackingAreasResponse> GetWorldTrackingAreas(string guildId, Guid worldId) =>
+            _worldTrackingApi.GetAsync(guildId, worldId);
+
+        internal Task<WorldTrackingAreasResponse> SyncWorldTrackingAreas(
+            string guildId, Guid worldId, SyncWorldTrackingAreasRequest request) =>
+            _worldTrackingApi.PutAsync(guildId, worldId, request);
         
         static Configuration GetConfiguration()
         {
             Configuration config = new Configuration();
-            config.ApiKey.Add("Bearer", GetToken());
+            string token = GetToken();
+            if (!string.IsNullOrEmpty(token))
+            {
+                config.ApiKey.Add("Authorization", token);
+                config.ApiKeyPrefix.Add("Authorization", "Bearer");
+            }
             
             return config;
         }
