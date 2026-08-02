@@ -47,9 +47,6 @@ namespace VRCLinking.Editor.Modules.AreaTracking
             RequestOptions options = new RequestOptions();
             options.PathParameters.Add("guildId", ClientUtils.ParameterToString(guildId));
             options.PathParameters.Add("worldId", ClientUtils.ParameterToString(worldId));
-            string authorization = _configuration.GetApiKeyWithPrefix("Authorization");
-            if (!string.IsNullOrEmpty(authorization))
-                options.HeaderParameters.Add("Authorization", authorization);
             return options;
         }
 

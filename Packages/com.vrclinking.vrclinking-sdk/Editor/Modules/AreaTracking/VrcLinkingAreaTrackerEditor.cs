@@ -296,7 +296,7 @@ namespace VRCLinking.Editor.Modules.AreaTracking
             VisualElement actions = new VisualElement();
             actions.AddToClassList("area-row-actions");
             actions.Add(ActionButton("◎", "Select and frame area", () => SelectAndFrame(entry.Area)));
-            actions.Add(ActionButton("⧉", "Duplicate area", () =>
+            actions.Add(ActionButton("Copy", "Duplicate area", () =>
             {
                 AreaTrackingSceneUtility.DuplicateArea(entry.Area);
                 _serverState = ServerState.Dirty;

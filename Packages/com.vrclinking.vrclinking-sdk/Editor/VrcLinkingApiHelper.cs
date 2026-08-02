@@ -174,15 +174,10 @@ namespace VRCLinking.Editor
         
         static Configuration GetConfiguration()
         {
-            Configuration config = new Configuration();
-            string token = GetToken();
-            if (!string.IsNullOrEmpty(token))
-            {
-                config.ApiKey.Add("Authorization", token);
-                config.ApiKeyPrefix.Add("Authorization", "Bearer");
-            }
-            
-            return config;
+            // SDK OAuth establishes a cookie-backed session shared by UnityWebRequest.
+            // The token returned by that flow belongs to the legacy session system;
+            // sending it as a bearer API key bypasses session loading on the backend.
+            return new Configuration();
         }
 
         static string GetToken() => EditorPrefs.GetString(TokenEditorPrefKey, "");
