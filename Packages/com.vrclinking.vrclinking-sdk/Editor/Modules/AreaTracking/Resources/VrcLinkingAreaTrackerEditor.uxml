@@ -26,7 +26,7 @@
             <ui:Label text="Seconds between periodic telemetry requests." class="tracking-hint" />
             <ui:Slider name="StartupDelay" label="Startup Delay" low-value="5" high-value="120" show-input-field="true" />
             <ui:Label text="Delay before the first request, allowing other world startup work to finish." class="tracking-hint" />
-            <ui:HelpBox text="Players outside every included box are recorded as Outside automatically." message-type="Info" />
+            <ui:VisualElement name="OutsideTrackingHelpBoxContainer" />
 
             <ui:VisualElement class="tracking-section-divider" />
             <ui:Label text="Server Configuration" class="tracking-section-title" />
@@ -71,7 +71,7 @@
                     <ui:Button name="MapSelectNone" text="None" />
                 </ui:VisualElement>
             </ui:VisualElement>
-            <uie:HelpBox name="MapSelectionWarning" message-type="Warning" class="tracking-hidden" />
+            <ui:VisualElement name="MapSelectionWarningContainer" />
             <ui:ScrollView name="MapAreaList" class="tracking-list map-area-list" />
 
             <ui:VisualElement class="tracking-section-divider" />

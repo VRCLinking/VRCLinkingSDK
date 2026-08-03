@@ -143,7 +143,15 @@ namespace VRCLinking.Editor.Modules.AreaTracking
             _mapCapabilitiesLabel = _root.Q<Label>("MapCapabilities");
             _mapAreaSummary = _root.Q<Label>("MapAreaSummary");
             _mapSnapshotStatus = _root.Q<Label>("MapSnapshotStatus");
-            _mapSelectionWarning = _root.Q<HelpBox>("MapSelectionWarning");
+            VisualElement outsideTrackingHelpBoxContainer =
+                _root.Q<VisualElement>("OutsideTrackingHelpBoxContainer");
+            outsideTrackingHelpBoxContainer?.Add(new HelpBox(
+                "Players outside every included box are recorded as Outside automatically.",
+                HelpBoxMessageType.Info));
+
+            _mapSelectionWarning = new HelpBox(string.Empty, HelpBoxMessageType.Warning);
+            _mapSelectionWarning.AddToClassList("tracking-hidden");
+            _root.Q<VisualElement>("MapSelectionWarningContainer")?.Add(_mapSelectionWarning);
             _mapSnapshotProgress = _root.Q<ProgressBar>("MapSnapshotProgress");
             _mapLayerMask = new LayerMaskField("Layers") { value = ~0 };
             _root.Q<VisualElement>("MapLayerMaskContainer").Add(_mapLayerMask);
