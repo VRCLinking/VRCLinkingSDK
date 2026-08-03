@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Threading;
 using System.Threading.Tasks;
 using UnityEditor;
 using UnityEngine;
@@ -26,6 +27,7 @@ namespace VRCLinking.Editor
         WorldsApi _worldsApi;
         UnityPosterApi _unityPosterApi;
         VrcLinkingWorldTrackingApi _worldTrackingApi;
+        VrcLinkingWorldMapApi _worldMapApi;
         
         public VrcLinkingApiHelper()
         {
@@ -43,6 +45,7 @@ namespace VRCLinking.Editor
             _worldsApi = new WorldsApi(config);
             _unityPosterApi = new UnityPosterApi(config);
             _worldTrackingApi = new VrcLinkingWorldTrackingApi(config);
+            _worldMapApi = new VrcLinkingWorldMapApi(config);
         }
 
         public void SetToken(string token)
@@ -171,6 +174,34 @@ namespace VRCLinking.Editor
         internal Task<WorldTrackingAreasResponse> SyncWorldTrackingAreas(
             string guildId, Guid worldId, SyncWorldTrackingAreasRequest request) =>
             _worldTrackingApi.PutAsync(guildId, worldId, request);
+
+        internal Task<WorldMapCapabilities> GetWorldMapCapabilities(string guildId, Guid worldId,
+            CancellationToken cancellationToken = default) =>
+            _worldMapApi.GetCapabilitiesAsync(guildId, worldId, cancellationToken);
+
+        internal Task<List<WorldMapSummary>> GetWorldMaps(string guildId, Guid worldId,
+            CancellationToken cancellationToken = default) =>
+            _worldMapApi.GetMapsAsync(guildId, worldId, cancellationToken);
+
+        internal Task<WorldMapUploadSession> CreateWorldMapUpload(string guildId, Guid worldId,
+            CreateWorldMapSnapshotUploadRequest request, CancellationToken cancellationToken = default) =>
+            _worldMapApi.CreateUploadAsync(guildId, worldId, request, cancellationToken);
+
+        internal Task UploadWorldMapPart(string guildId, Guid worldId, Guid sessionId, string partId,
+            byte[] data, CancellationToken cancellationToken = default) =>
+            _worldMapApi.UploadPartAsync(guildId, worldId, sessionId, partId, data, cancellationToken);
+
+        internal Task<WorldMapUploadSession> FinalizeWorldMapUpload(string guildId, Guid worldId,
+            Guid sessionId, string manifestSha256, CancellationToken cancellationToken = default) =>
+            _worldMapApi.FinalizeAsync(guildId, worldId, sessionId, manifestSha256, cancellationToken);
+
+        internal Task<WorldMapUploadSession> GetWorldMapUpload(string guildId, Guid worldId,
+            Guid sessionId, CancellationToken cancellationToken = default) =>
+            _worldMapApi.GetUploadAsync(guildId, worldId, sessionId, cancellationToken);
+
+        internal Task CancelWorldMapUpload(string guildId, Guid worldId, Guid sessionId,
+            CancellationToken cancellationToken = default) =>
+            _worldMapApi.CancelAsync(guildId, worldId, sessionId, cancellationToken);
         
         static Configuration GetConfiguration()
         {

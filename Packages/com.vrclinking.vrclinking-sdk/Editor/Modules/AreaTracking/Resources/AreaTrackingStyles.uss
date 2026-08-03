@@ -18,6 +18,33 @@
     align-items: center;
 }
 
+.map-selection-actions {
+    flex-direction: row;
+    align-items: center;
+}
+
+.map-selection-actions Button {
+    min-width: 48px;
+    margin-left: 3px;
+}
+
+.map-area-list {
+    max-height: 280px;
+}
+
+.map-area-row {
+    min-height: 28px;
+    padding: 2px 4px;
+}
+
+.map-area-row Toggle {
+    flex-grow: 1;
+}
+
+.map-area-extreme {
+    color: rgb(224, 178, 70);
+}
+
 .tracking-header-title-row {
     margin-bottom: 6px;
 }

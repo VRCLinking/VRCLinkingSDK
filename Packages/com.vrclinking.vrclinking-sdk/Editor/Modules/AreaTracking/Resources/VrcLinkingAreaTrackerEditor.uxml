@@ -15,6 +15,7 @@
         <uie:Toolbar class="tracking-tabs">
             <uie:ToolbarToggle name="SetupTab" text="Setup" value="true" />
             <uie:ToolbarToggle name="AreasTab" text="Areas" />
+            <uie:ToolbarToggle name="MapTab" text="Map Snapshot" />
             <uie:ToolbarToggle name="ValidationTab" text="Validation" />
         </uie:Toolbar>
 
@@ -45,6 +46,41 @@
                 <ui:Button name="AddArea" text="+ Add Area" class="primary-action" />
             </ui:VisualElement>
             <ui:ScrollView name="AreaList" class="tracking-list" />
+        </ui:VisualElement>
+
+        <ui:VisualElement name="MapPanel" class="tracking-panel tracking-hidden">
+            <ui:Label text="Top-down World Snapshot" class="tracking-section-title" />
+            <ui:Label text="Capture a tiled image separately from Sync Areas. Only the selected areas determine the map bounds and initial website overlays." class="tracking-hint" />
+            <ui:DropdownField name="MapDestination" label="Destination" />
+            <ui:TextField name="MapName" label="Map name" value="World Map" max-length="100" />
+            <ui:DropdownField name="MapResolution" label="Resolution" />
+            <ui:FloatField name="MapPadding" label="Padding (%)" value="10" />
+            <ui:VisualElement name="MapLayerMaskContainer" />
+            <uie:ColorField name="MapBackground" label="Background" value="#20252BFF" />
+            <ui:Label name="MapCapabilities" text="Open this tab to load server capture limits." class="tracking-hint" />
+
+            <ui:VisualElement class="tracking-section-divider" />
+            <ui:VisualElement class="tracking-panel-heading-row">
+                <ui:VisualElement>
+                    <ui:Label text="Areas included in this map" class="tracking-section-title" />
+                    <ui:Label name="MapAreaSummary" class="tracking-hint" />
+                </ui:VisualElement>
+                <ui:VisualElement class="map-selection-actions">
+                    <ui:Button name="MapSelectRecommended" text="Recommended" />
+                    <ui:Button name="MapSelectAll" text="All" />
+                    <ui:Button name="MapSelectNone" text="None" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <uie:HelpBox name="MapSelectionWarning" message-type="Warning" class="tracking-hidden" />
+            <ui:ScrollView name="MapAreaList" class="tracking-list map-area-list" />
+
+            <ui:VisualElement class="tracking-section-divider" />
+            <ui:Label name="MapSnapshotStatus" text="Ready to analyze the scene." class="tracking-hint" />
+            <ui:ProgressBar name="MapSnapshotProgress" title="" value="0" class="tracking-hidden" />
+            <ui:VisualElement class="tracking-action-row">
+                <ui:Button name="CancelMapSnapshot" text="Cancel" class="tracking-hidden" />
+                <ui:Button name="TakeMapSnapshot" text="Take Snapshot" class="primary-action" />
+            </ui:VisualElement>
         </ui:VisualElement>
 
         <ui:VisualElement name="ValidationPanel" class="tracking-panel tracking-hidden">
