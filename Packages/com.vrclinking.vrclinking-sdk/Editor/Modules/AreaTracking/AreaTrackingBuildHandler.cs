@@ -9,7 +9,7 @@ namespace VRCLinking.Editor.Modules.AreaTracking
 {
     internal static class AreaTrackingBuildHandler
     {
-        const string TelemetryBaseUrl = "https://data.vrclinking.com/telemetry/v1/worlds/";
+        const string TelemetryBaseUrl = "https://telemetry.vrclinking.com/v1/worlds/";
 
         [PostProcessScene(-20)]
         public static void OnBuild()
