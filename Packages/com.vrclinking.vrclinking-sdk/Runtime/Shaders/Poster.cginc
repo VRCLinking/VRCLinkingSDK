@@ -1,9 +1,10 @@
-﻿#ifndef POSTER_INCLUDED
+#ifndef POSTER_INCLUDED
 #define POSTER_INCLUDED
 
 #include "UnityCG.cginc"
 #include "PosterInput.cginc"
 #include "PosterUtils.cginc"
+#include "PosterPlayback.cginc"
 
 struct PosterAppdata
 {
@@ -34,7 +35,7 @@ PosterVaryings PosterVert(PosterAppdata v)
     UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
 
     o.vertex = UnityObjectToClipPos(v.vertex);
-    o.uv = _AspectCorrection ? ApplyAspect(v.uv) : v.uv;
+    o.uv = _PosterState.w < 0.5 && _AspectCorrection ? ApplyAspect(v.uv) : v.uv;
 
     UNITY_TRANSFER_FOG(o, o.vertex);
     return o;
@@ -43,6 +44,14 @@ PosterVaryings PosterVert(PosterAppdata v)
 fixed4 PosterFrag(PosterVaryings i) : SV_Target
 {
     UNITY_SETUP_INSTANCE_ID(i);
+    UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(i);
+
+    if (_PosterState.w > 0.5)
+    {
+        fixed4 playbackColor = SamplePosterPlayback(i.uv) * _Color;
+        UNITY_APPLY_FOG(i.fogCoord, playbackColor);
+        return playbackColor;
+    }
 
     float2 uv = i.uv;
 

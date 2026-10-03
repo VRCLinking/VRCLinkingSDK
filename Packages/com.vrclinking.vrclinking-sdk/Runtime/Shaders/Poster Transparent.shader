@@ -3,6 +3,12 @@ Shader "VRCLinking/Poster Transparent"
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
+        [HideInInspector] _NextTex ("Next Atlas", 2D) = "white" {}
+        [HideInInspector] _NextRect ("Next Rect", Vector) = (1,1,0,0)
+        [HideInInspector] _PosterAspects ("Content / Frame Aspects / Fit", Vector) = (1,1,1,0)
+        [HideInInspector] _PosterState ("Progress / Mode / Direction / Enabled", Vector) = (0,0,0,0)
+        [HideInInspector] _PosterAvailable ("Available Images", Vector) = (1,1,0,0)
+        _FadeColor ("Fade Color", Color) = (0,0,0,1)
         _Color ("Color", Color) = (1, 1, 1, 1)
 
         [Header(Boxing)] [Space]
@@ -31,6 +37,7 @@ Shader "VRCLinking/Poster Transparent"
 
             CGPROGRAM
 
+            #pragma target 3.0
             #pragma vertex PosterVert
             #pragma fragment PosterFrag
 
@@ -55,6 +62,8 @@ Shader "VRCLinking/Poster Transparent"
 
             #define ALPHABLEND
 
+            #pragma target 3.0
+            #pragma multi_compile_instancing
             #pragma vertex ShadowVert
             #pragma fragment ShadowFrag
 

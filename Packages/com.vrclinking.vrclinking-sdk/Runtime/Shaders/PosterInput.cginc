@@ -1,11 +1,18 @@
-﻿#ifndef POSTER_INPUT_INCLUDED
+#ifndef POSTER_INPUT_INCLUDED
 #define POSTER_INPUT_INCLUDED
 
 #include "UnityCG.cginc"
 
 UNITY_DECLARE_TEX2D(_MainTex);
+UNITY_DECLARE_TEX2D(_NextTex);
 float4 _MainTex_TexelSize;
+float4 _NextTex_TexelSize;
 float4 _Color;
+float4 _NextRect;
+float4 _PosterAspects;
+float4 _PosterState;
+float4 _PosterAvailable;
+float4 _FadeColor;
 
 bool _AspectCorrection;
 float4 _BoxingColor;

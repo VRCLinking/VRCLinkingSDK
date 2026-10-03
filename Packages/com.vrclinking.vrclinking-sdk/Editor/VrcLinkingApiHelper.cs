@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -159,11 +159,13 @@ namespace VRCLinking.Editor
         public async Task SyncPosters(string guildId, Guid worldId, List<VrcLinkingPoster> posters)
         {
             
-            var request = new SyncPostersRequest(posters.Select(p => new UnityPosterData()
+            // Slot IDs identify server content, not individual physical displays.
+            // Include complete playlists/group pools and send each content ID once.
+            var request = new SyncPostersRequest(posters.SelectMany(p => p.GetSlotIds().Select(id => new UnityPosterData
             {
-                SlotId = p.slotId,
-                SlotName = p.slotName
-            }).ToList());
+                SlotId = id,
+                SlotName = p.group != null ? p.group.slotName : p.slotName
+            })).GroupBy(p => p.SlotId).Select(g => g.First()).OrderBy(p => p.SlotId).ToList());
             
             await _unityPosterApi.SyncPostersAsync(guildId, worldId, request);
         }

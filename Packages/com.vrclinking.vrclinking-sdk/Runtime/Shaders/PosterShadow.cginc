@@ -1,4 +1,4 @@
-﻿#ifndef POSTER_SHADOW_INCLUDED
+#ifndef POSTER_SHADOW_INCLUDED
 #define POSTER_SHADOW_INCLUDED
 
 #include "UnityCG.cginc"
@@ -12,6 +12,7 @@ struct ShadowVaryings
 
     float2 uv : TEXCOORD0;
 
+    UNITY_VERTEX_INPUT_INSTANCE_ID
     UNITY_VERTEX_OUTPUT_STEREO
 };
 
@@ -20,9 +21,11 @@ ShadowVaryings ShadowVert(appdata_base v)
     ShadowVaryings o;
 
     UNITY_SETUP_INSTANCE_ID(v);
+    UNITY_INITIALIZE_OUTPUT(ShadowVaryings, o);
+    UNITY_TRANSFER_INSTANCE_ID(v, o);
     UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
 
-    o.uv = _AspectCorrection ? ApplyAspect(v.texcoord, GetContentWidth(), GetContentHeight()) : v.texcoord;
+    o.uv = _PosterState.w < 0.5 && _AspectCorrection ? ApplyAspect(v.texcoord, GetContentWidth(), GetContentHeight()) : v.texcoord;
     TRANSFER_SHADOW_CASTER_NORMALOFFSET(o)
 
     return o;
@@ -30,6 +33,8 @@ ShadowVaryings ShadowVert(appdata_base v)
 
 float4 ShadowFrag(ShadowVaryings i) : SV_Target
 {
+    UNITY_SETUP_INSTANCE_ID(i);
+    #ifdef ALPHABLEND
     float2 uv = i.uv;
 
     // Computing the tex uvs here let us get away with replacing a div with a mul whilst still only using 1 register.
@@ -42,9 +47,9 @@ float4 ShadowFrag(ShadowVaryings i) : SV_Target
         col = BoxContent(uv, GetContentWidth(), GetContentHeight(), col, _BoxingColor);
     }
 
+    if (_PosterState.w > 0.5) col = SamplePosterPlayback(uv);
     col *= _Color;
 
-    #ifdef ALPHABLEND
         // Use dither mask for alpha blended shadows, based on pixel position xy
         // and alpha level. Our dither texture is 4x4x16.
         half alphaRef = tex3D(_DitherMaskLOD, float3(i.pos.xy * 0.25, col.a * 0.9375)).a;
