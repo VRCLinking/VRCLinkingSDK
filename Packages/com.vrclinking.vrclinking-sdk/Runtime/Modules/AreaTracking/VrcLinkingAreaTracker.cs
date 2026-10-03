@@ -19,6 +19,54 @@ public class VrcLinkingAreaTracker : UdonSharpBehaviour
     [HideInInspector] public VRCUrl outsideHeartbeatUrl;
 
     int _currentAreaIndex = -1;
+    UdonSharpBehaviour[] _areaChangeListeners = new UdonSharpBehaviour[0];
+
+    // Local player's index into trackingAreas; -1 means outside or not yet known.
+    public int CurrentAreaIndex { get { return _currentAreaIndex; } }
+
+    // Listeners implement public void OnVrcLinkingAreaChanged() and read CurrentAreaIndex.
+    // Registration does not replay the current state; read it after registering if needed.
+    public void RegisterAreaChangeListener(UdonSharpBehaviour listener)
+    {
+        if (listener == null) return;
+        for (int i = 0; i < _areaChangeListeners.Length; i++)
+            if (_areaChangeListeners[i] == listener) return;
+
+        var listeners = new UdonSharpBehaviour[_areaChangeListeners.Length + 1];
+        for (int i = 0; i < _areaChangeListeners.Length; i++)
+            listeners[i] = _areaChangeListeners[i];
+        listeners[listeners.Length - 1] = listener;
+        _areaChangeListeners = listeners;
+    }
+
+    public void UnregisterAreaChangeListener(UdonSharpBehaviour listener)
+    {
+        int remaining = 0;
+        for (int i = 0; i < _areaChangeListeners.Length; i++)
+            if (_areaChangeListeners[i] != null && _areaChangeListeners[i] != listener) remaining++;
+        if (remaining == _areaChangeListeners.Length) return;
+
+        var listeners = new UdonSharpBehaviour[remaining];
+        int index = 0;
+        for (int i = 0; i < _areaChangeListeners.Length; i++)
+            if (_areaChangeListeners[i] != null && _areaChangeListeners[i] != listener)
+                listeners[index++] = _areaChangeListeners[i];
+        _areaChangeListeners = listeners;
+    }
+
+    void SetCurrentAreaIndex(int index)
+    {
+        if (_currentAreaIndex == index) return;
+        _currentAreaIndex = index;
+
+        // Copy-on-write registration keeps this notification's recipient list stable.
+        var listeners = _areaChangeListeners;
+        for (int i = 0; i < listeners.Length; i++)
+        {
+            if (listeners[i] != null)
+                listeners[i].SendCustomEvent("OnVrcLinkingAreaChanged");
+        }
+    }
 
     void Start()
     {
@@ -46,13 +94,13 @@ public class VrcLinkingAreaTracker : UdonSharpBehaviour
     public void NotifyAreaEntered(int runtimeIndex)
     {
         if (runtimeIndex >= 0 && trackingAreas != null && runtimeIndex < trackingAreas.Length)
-            _currentAreaIndex = runtimeIndex;
+            SetCurrentAreaIndex(runtimeIndex);
     }
 
     public void NotifyAreaExited(int runtimeIndex)
     {
         if (_currentAreaIndex == runtimeIndex)
-            _currentAreaIndex = -1;
+            SetCurrentAreaIndex(-1);
     }
 
     public void SendHeartbeat()
@@ -82,20 +130,20 @@ public class VrcLinkingAreaTracker : UdonSharpBehaviour
 
     void ReconcileCurrentArea(Vector3 position)
     {
-        _currentAreaIndex = -1;
-
-        if (trackingAreas == null)
-            return;
-
-        for (int i = 0; i < trackingAreas.Length; i++)
+        int nextAreaIndex = -1;
+        if (trackingAreas != null)
         {
-            VrcLinkingTrackingArea area = trackingAreas[i];
-            if (area != null && area.ContainsWorldPosition(position))
+            for (int i = 0; i < trackingAreas.Length; i++)
             {
-                _currentAreaIndex = i;
-                return;
+                VrcLinkingTrackingArea area = trackingAreas[i];
+                if (area != null && area.ContainsWorldPosition(position))
+                {
+                    nextAreaIndex = i;
+                    break;
+                }
             }
         }
+        SetCurrentAreaIndex(nextAreaIndex);
     }
 
     public override void OnStringLoadError(IVRCStringDownload result)
